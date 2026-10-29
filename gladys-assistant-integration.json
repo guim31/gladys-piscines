@@ -8,8 +8,8 @@
     "de": "Live-Andrang städtischer Schwimmbäder und Eisbahnen in Frankreich (Open Data): Straßburg, Bordeaux",
     "es": "Afluencia en directo de piscinas y pistas de hielo municipales francesas (datos abiertos)"
   },
-  "version": "1.0.0",
-  "docker_image": "ghcr.io/guim31/gladys-piscines:1.0.0",
+  "version": "1.1.0",
+  "docker_image": "ghcr.io/guim31/gladys-piscines:1.1.0",
   "gladys_version": ">=5.3.0",
   "cover_image": "https://raw.githubusercontent.com/guim31/gladys-piscines/main/cover.png",
   "categories": ["services"],

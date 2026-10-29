@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-29
+
 ### Added
 
 - Live crowd of Strasbourg's Iceberg ice rink (open data): tick "Strasbourg
@@ -38,5 +40,6 @@ the notes of the version's GitHub Release.
   drops below a threshold.
 - Scene action "Get the crowd of the pools", with a sentence ready to send.
 
-[Unreleased]: https://github.com/guim31/gladys-piscines/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/guim31/gladys-piscines/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/guim31/gladys-piscines/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/guim31/gladys-piscines/releases/tag/v1.0.0

@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-10-29
+
 ### Added
 
 - Live crowd and opening of the public swimming pools of the Eurométropole de
@@ -26,3 +28,6 @@ the notes of the version's GitHub Release.
 - Scene triggers: the pool opens, the pool closes, the crowd rises above or
   drops below a threshold.
 - Scene action "Get the crowd of the pools", with a sentence ready to send.
+
+[Unreleased]: https://github.com/guim31/gladys-piscines/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/guim31/gladys-piscines/releases/tag/v1.0.0

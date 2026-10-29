@@ -1,177 +1,770 @@
 {
   "manifest_version": 1,
   "type": "device",
-  "name": "Demo Devices Template",
+  "name": "Piscines en temps réel",
   "description": {
-    "en": "Starter template showing sensors, a switch, a dimmable light and a smart plug.",
-    "fr": "Template de démarrage : capteurs, interrupteur, lampe variable et prise connectée."
+    "en": "Live crowd and opening of the public swimming pools of French cities (open data): Strasbourg…",
+    "fr": "Affluence et ouverture en direct des piscines municipales de villes françaises : Strasbourg…",
+    "de": "Live-Andrang und Öffnung städtischer Schwimmbäder in Frankreich (Open Data): Straßburg, Bordeaux",
+    "es": "Afluencia y apertura en directo de piscinas municipales francesas (datos abiertos): Estrasburgo…"
   },
   "version": "1.0.0",
-  "docker_image": "ghcr.io/gladysassistant/integration-template-js:1.0.0",
-  "gladys_version": ">=5.1.0",
-  "cover_image": "https://raw.githubusercontent.com/GladysAssistant/integration-template-js/master/cover.png",
-  "categories": ["lighting", "security", "environment"],
-  "transports": ["local", "cloud"],
+  "docker_image": "ghcr.io/guim31/gladys-piscines:1.0.0",
+  "gladys_version": ">=5.3.0",
+  "cover_image": "https://raw.githubusercontent.com/guim31/gladys-piscines/main/cover.png",
+  "categories": ["services"],
+  "transports": ["cloud"],
+  "countries": ["FR"],
+  "keywords": [
+    "piscine",
+    "swimming pool",
+    "Strasbourg",
+    "Bordeaux",
+    "affluence",
+    "fréquentation",
+    "open data"
+  ],
   "config_schema": [
     {
       "key": "intro",
       "type": "section",
-      "label": { "en": "Getting started", "fr": "Pour commencer" },
+      "label": {
+        "en": "How it works",
+        "fr": "Fonctionnement",
+        "de": "So funktioniert es",
+        "es": "Funcionamiento"
+      },
       "description": {
-        "en": "The demo weather station reads real data from the free Open-Meteo API: pick the coordinates to observe. No account, no API key.",
-        "fr": "La station météo de démonstration lit de vraies données via l'API gratuite Open-Meteo : choisissez les coordonnées à observer. Pas de compte, pas de clé d'API."
+        "en": "Tick your cities and save: their pools appear in the Discover tab. Add the ones you want to Gladys. No account, no key.",
+        "fr": "Cochez vos villes et enregistrez : leurs piscines apparaissent dans l'onglet Découverte. Ajoutez celles qui vous intéressent à Gladys. Sans compte ni clé.",
+        "de": "Kreuze deine Städte an und speichere: ihre Schwimmbäder erscheinen im Tab „Entdecken“. Füge die gewünschten zu Gladys hinzu. Kein Konto, kein Schlüssel.",
+        "es": "Marque sus ciudades y guarde: sus piscinas aparecen en la pestaña Descubrir. Añada a Gladys las que le interesen. Sin cuenta ni clave."
       },
       "links": [
         {
-          "url": "https://open-meteo.com/en/docs",
-          "label": { "en": "Open-Meteo documentation", "fr": "Documentation Open-Meteo" }
+          "url": "https://github.com/guim31/gladys-piscines/blob/main/docs/en.md",
+          "label": {
+            "en": "Setup guide",
+            "fr": "Guide de configuration",
+            "de": "Einrichtungsanleitung",
+            "es": "Guía de configuración"
+          }
         }
       ]
     },
     {
-      "key": "latitude",
-      "type": "number",
-      "label": { "en": "Latitude", "fr": "Latitude" },
-      "description": {
-        "en": "Latitude used for the demo weather sensor.",
-        "fr": "Latitude utilisée par le capteur météo de démonstration."
+      "key": "cities",
+      "type": "multi_select",
+      "label": {
+        "en": "Cities",
+        "fr": "Villes",
+        "de": "Städte",
+        "es": "Ciudades"
       },
-      "placeholder": { "en": "e.g. 48.8566", "fr": "ex. 48.8566" },
-      "required": true,
-      "default": 48.8566,
-      "min": -90,
-      "max": 90
-    },
-    {
-      "key": "longitude",
-      "type": "number",
-      "label": { "en": "Longitude", "fr": "Longitude" },
       "description": {
-        "en": "Longitude used for the demo weather sensor.",
-        "fr": "Longitude utilisée par le capteur météo de démonstration."
+        "en": "Pools whose crowd is published live in open data. Others: see the guide.",
+        "fr": "Piscines dont l'affluence est publiée en direct en open data. Autres villes : voir le guide.",
+        "de": "Schwimmbäder, deren Andrang live als Open Data veröffentlicht wird. Andere Städte: siehe Anleitung.",
+        "es": "Piscinas cuya afluencia se publica en directo en datos abiertos. Otras ciudades: vea la guía."
       },
-      "placeholder": { "en": "e.g. 2.3522", "fr": "ex. 2.3522" },
-      "required": true,
-      "default": 2.3522,
-      "min": -180,
-      "max": 180
-    },
-    {
-      "key": "unit",
-      "type": "select",
-      "label": { "en": "Temperature unit", "fr": "Unité de température" },
-      "required": false,
-      "default": "celsius",
       "options": [
-        { "value": "celsius", "label": { "en": "Celsius", "fr": "Celsius" } },
-        { "value": "fahrenheit", "label": { "en": "Fahrenheit", "fr": "Fahrenheit" } }
+        {
+          "value": "strasbourg",
+          "label": {
+            "en": "Strasbourg (Eurométropole)",
+            "fr": "Strasbourg (Eurométropole)",
+            "de": "Straßburg (Eurométropole)",
+            "es": "Estrasburgo (Eurométropole)"
+          }
+        },
+        {
+          "value": "bordeaux",
+          "label": {
+            "en": "Bordeaux (city pools)",
+            "fr": "Bordeaux (piscines de la ville)",
+            "de": "Bordeaux (städtische Bäder)",
+            "es": "Burdeos (piscinas municipales)"
+          }
+        }
       ]
     },
     {
-      "key": "poll_frequency",
-      "type": "number",
-      "label": { "en": "Refresh interval (s)", "fr": "Intervalle de rafraîchissement (s)" },
-      "description": {
-        "en": "How often sensors are polled, in seconds (one minute minimum).",
-        "fr": "Fréquence d'interrogation des capteurs, en secondes (une minute minimum)."
+      "key": "refresh_interval",
+      "type": "select",
+      "default": "300",
+      "label": {
+        "en": "Refresh",
+        "fr": "Rafraîchissement",
+        "de": "Aktualisierung",
+        "es": "Actualización"
       },
-      "required": false,
-      "default": 300,
-      "min": 60,
-      "max": 3600
+      "options": [
+        {
+          "value": "180",
+          "label": {
+            "en": "Every 3 minutes",
+            "fr": "Toutes les 3 minutes",
+            "de": "Alle 3 Minuten",
+            "es": "Cada 3 minutos"
+          }
+        },
+        {
+          "value": "300",
+          "label": {
+            "en": "Every 5 minutes",
+            "fr": "Toutes les 5 minutes",
+            "de": "Alle 5 Minuten",
+            "es": "Cada 5 minutos"
+          }
+        },
+        {
+          "value": "600",
+          "label": {
+            "en": "Every 10 minutes",
+            "fr": "Toutes les 10 minutes",
+            "de": "Alle 10 Minuten",
+            "es": "Cada 10 minutos"
+          }
+        }
+      ]
+    },
+    {
+      "key": "language",
+      "type": "select",
+      "default": "fr",
+      "label": {
+        "en": "Language of names and messages",
+        "fr": "Langue des noms et messages",
+        "de": "Sprache der Namen und Nachrichten",
+        "es": "Idioma de nombres y mensajes"
+      },
+      "description": {
+        "en": "Feature names are fixed when a device is added.",
+        "fr": "Les noms des fonctionnalités sont figés à l'ajout de l'appareil.",
+        "de": "Die Namen der Funktionen werden beim Hinzufügen festgelegt.",
+        "es": "Los nombres de las funciones se fijan al añadir el dispositivo."
+      },
+      "options": [
+        {
+          "value": "en",
+          "label": {
+            "en": "English",
+            "fr": "Anglais",
+            "de": "Englisch",
+            "es": "Inglés"
+          }
+        },
+        {
+          "value": "fr",
+          "label": {
+            "en": "French",
+            "fr": "Français",
+            "de": "Französisch",
+            "es": "Francés"
+          }
+        },
+        {
+          "value": "de",
+          "label": {
+            "en": "German",
+            "fr": "Allemand",
+            "de": "Deutsch",
+            "es": "Alemán"
+          }
+        },
+        {
+          "value": "es",
+          "label": {
+            "en": "Spanish",
+            "fr": "Espagnol",
+            "de": "Spanisch",
+            "es": "Español"
+          }
+        }
+      ]
     }
   ],
   "actions": [
     {
-      "key": "test_weather",
-      "label": { "en": "Test the weather provider", "fr": "Tester le fournisseur météo" },
-      "timeout_seconds": 30
-    },
-    {
-      "key": "identify",
-      "label": { "en": "Identify a device", "fr": "Identifier un appareil" },
-      "fields": [
-        {
-          "key": "device",
-          "type": "select",
-          "source": "devices",
-          "label": { "en": "Device", "fr": "Appareil" },
-          "required": true
-        }
-      ]
+      "key": "status",
+      "label": {
+        "en": "Status",
+        "fr": "État",
+        "de": "Status",
+        "es": "Estado"
+      },
+      "description": {
+        "en": "Cities read, pools found, last readings and errors.",
+        "fr": "Villes lues, piscines trouvées, dernières lectures et erreurs.",
+        "de": "Gelesene Städte, gefundene Schwimmbäder, letzte Abfragen und Fehler.",
+        "es": "Ciudades leídas, piscinas encontradas, últimas lecturas y errores."
+      },
+      "timeout_seconds": 30,
+      "fields": []
     }
   ],
   "scene_triggers": [
     {
-      "key": "motion_detected",
-      "label": { "en": "Motion detected", "fr": "Mouvement détecté" },
+      "key": "opened",
+      "label": {
+        "en": "Pool opens",
+        "fr": "La piscine ouvre",
+        "de": "Schwimmbad öffnet",
+        "es": "La piscina abre"
+      },
       "description": {
-        "en": "A demo motion sensor saw a person or an animal move.",
-        "fr": "Un détecteur de démonstration a vu bouger une personne ou un animal."
+        "en": "A watched pool opens (cities that publish the state: Strasbourg).",
+        "fr": "Une piscine suivie ouvre (villes qui publient l'état : Strasbourg).",
+        "de": "Ein überwachtes Schwimmbad öffnet (Städte, die den Zustand veröffentlichen: Straßburg).",
+        "es": "Una piscina vigilada abre (ciudades que publican el estado: Estrasburgo)."
       },
       "fields": [
         {
-          "key": "device",
-          "type": "select",
+          "key": "pool",
+          "type": "multi_select",
           "source": "devices",
-          "label": { "en": "Sensor", "fr": "Détecteur" }
+          "required": false,
+          "label": {
+            "en": "Pools",
+            "fr": "Piscines",
+            "de": "Schwimmbäder",
+            "es": "Piscinas"
+          },
+          "description": {
+            "en": "Empty: any watched pool.",
+            "fr": "Vide : n'importe quelle piscine suivie.",
+            "de": "Leer: jedes überwachte Schwimmbad.",
+            "es": "Vacío: cualquier piscina vigilada."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "pool_name",
+          "type": "string",
+          "label": {
+            "en": "Pool",
+            "fr": "Piscine",
+            "de": "Schwimmbad",
+            "es": "Piscina"
+          }
         },
         {
-          "key": "target",
+          "key": "city",
+          "type": "string",
+          "label": {
+            "en": "City",
+            "fr": "Ville",
+            "de": "Stadt",
+            "es": "Ciudad"
+          }
+        },
+        {
+          "key": "people",
+          "type": "number",
+          "label": {
+            "en": "People inside",
+            "fr": "Personnes présentes",
+            "de": "Anwesende Personen",
+            "es": "Personas presentes"
+          }
+        },
+        {
+          "key": "occupancy",
+          "type": "number",
+          "label": {
+            "en": "Occupancy (%, 0 if unknown)",
+            "fr": "Taux d'occupation (%, 0 si inconnu)",
+            "de": "Auslastung (%, 0 wenn unbekannt)",
+            "es": "Ocupación (%, 0 si se desconoce)"
+          }
+        }
+      ]
+    },
+    {
+      "key": "closed",
+      "label": {
+        "en": "Pool closes",
+        "fr": "La piscine ferme",
+        "de": "Schwimmbad schließt",
+        "es": "La piscina cierra"
+      },
+      "description": {
+        "en": "A watched pool closes (cities that publish the state: Strasbourg).",
+        "fr": "Une piscine suivie ferme (villes qui publient l'état : Strasbourg).",
+        "de": "Ein überwachtes Schwimmbad schließt (Städte, die den Zustand veröffentlichen: Straßburg).",
+        "es": "Una piscina vigilada cierra (ciudades que publican el estado: Estrasburgo)."
+      },
+      "fields": [
+        {
+          "key": "pool",
           "type": "multi_select",
-          "label": { "en": "What moved", "fr": "Ce qui a bougé" },
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Pools",
+            "fr": "Piscines",
+            "de": "Schwimmbäder",
+            "es": "Piscinas"
+          },
+          "description": {
+            "en": "Empty: any watched pool.",
+            "fr": "Vide : n'importe quelle piscine suivie.",
+            "de": "Leer: jedes überwachte Schwimmbad.",
+            "es": "Vacío: cualquier piscina vigilada."
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "pool_name",
+          "type": "string",
+          "label": {
+            "en": "Pool",
+            "fr": "Piscine",
+            "de": "Schwimmbad",
+            "es": "Piscina"
+          }
+        },
+        {
+          "key": "city",
+          "type": "string",
+          "label": {
+            "en": "City",
+            "fr": "Ville",
+            "de": "Stadt",
+            "es": "Ciudad"
+          }
+        },
+        {
+          "key": "people",
+          "type": "number",
+          "label": {
+            "en": "People inside",
+            "fr": "Personnes présentes",
+            "de": "Anwesende Personen",
+            "es": "Personas presentes"
+          }
+        },
+        {
+          "key": "occupancy",
+          "type": "number",
+          "label": {
+            "en": "Occupancy (%, 0 if unknown)",
+            "fr": "Taux d'occupation (%, 0 si inconnu)",
+            "de": "Auslastung (%, 0 wenn unbekannt)",
+            "es": "Ocupación (%, 0 si se desconoce)"
+          }
+        }
+      ]
+    },
+    {
+      "key": "crowd_above",
+      "label": {
+        "en": "Crowd above a threshold",
+        "fr": "Affluence au-dessus d'un seuil",
+        "de": "Andrang über einer Schwelle",
+        "es": "Afluencia por encima de un umbral"
+      },
+      "description": {
+        "en": "The people inside a watched pool rise above the chosen threshold.",
+        "fr": "Le nombre de personnes dans une piscine suivie passe au-dessus du seuil choisi.",
+        "de": "Die Personen in einem überwachten Schwimmbad steigen über die gewählte Schwelle.",
+        "es": "Las personas en una piscina vigilada superan el umbral elegido."
+      },
+      "fields": [
+        {
+          "key": "pool",
+          "type": "multi_select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Pools",
+            "fr": "Piscines",
+            "de": "Schwimmbäder",
+            "es": "Piscinas"
+          },
+          "description": {
+            "en": "Empty: any watched pool.",
+            "fr": "Vide : n'importe quelle piscine suivie.",
+            "de": "Leer: jedes überwachte Schwimmbad.",
+            "es": "Vacío: cualquier piscina vigilada."
+          }
+        },
+        {
+          "key": "threshold",
+          "type": "select",
+          "required": true,
+          "label": {
+            "en": "Threshold (people)",
+            "fr": "Seuil (personnes)",
+            "de": "Schwelle (Personen)",
+            "es": "Umbral (personas)"
+          },
           "options": [
-            { "value": "person", "label": { "en": "Person", "fr": "Personne" } },
-            { "value": "animal", "label": { "en": "Animal", "fr": "Animal" } }
+            {
+              "value": "20",
+              "label": {
+                "en": "20",
+                "fr": "20",
+                "de": "20",
+                "es": "20"
+              }
+            },
+            {
+              "value": "50",
+              "label": {
+                "en": "50",
+                "fr": "50",
+                "de": "50",
+                "es": "50"
+              }
+            },
+            {
+              "value": "100",
+              "label": {
+                "en": "100",
+                "fr": "100",
+                "de": "100",
+                "es": "100"
+              }
+            },
+            {
+              "value": "150",
+              "label": {
+                "en": "150",
+                "fr": "150",
+                "de": "150",
+                "es": "150"
+              }
+            },
+            {
+              "value": "200",
+              "label": {
+                "en": "200",
+                "fr": "200",
+                "de": "200",
+                "es": "200"
+              }
+            },
+            {
+              "value": "300",
+              "label": {
+                "en": "300",
+                "fr": "300",
+                "de": "300",
+                "es": "300"
+              }
+            }
           ]
         }
       ],
       "variables": [
         {
-          "key": "target",
+          "key": "pool_name",
           "type": "string",
-          "label": { "en": "What moved", "fr": "Ce qui a bougé" }
+          "label": {
+            "en": "Pool",
+            "fr": "Piscine",
+            "de": "Schwimmbad",
+            "es": "Piscina"
+          }
+        },
+        {
+          "key": "city",
+          "type": "string",
+          "label": {
+            "en": "City",
+            "fr": "Ville",
+            "de": "Stadt",
+            "es": "Ciudad"
+          }
+        },
+        {
+          "key": "people",
+          "type": "number",
+          "label": {
+            "en": "People inside",
+            "fr": "Personnes présentes",
+            "de": "Anwesende Personen",
+            "es": "Personas presentes"
+          }
+        },
+        {
+          "key": "occupancy",
+          "type": "number",
+          "label": {
+            "en": "Occupancy (%, 0 if unknown)",
+            "fr": "Taux d'occupation (%, 0 si inconnu)",
+            "de": "Auslastung (%, 0 wenn unbekannt)",
+            "es": "Ocupación (%, 0 si se desconoce)"
+          }
+        }
+      ]
+    },
+    {
+      "key": "crowd_below",
+      "label": {
+        "en": "Crowd below a threshold",
+        "fr": "Affluence sous un seuil",
+        "de": "Andrang unter einer Schwelle",
+        "es": "Afluencia por debajo de un umbral"
+      },
+      "description": {
+        "en": "The people inside a watched open pool drop to the chosen threshold or below.",
+        "fr": "Le nombre de personnes dans une piscine suivie ouverte descend au seuil choisi ou en dessous.",
+        "de": "Die Personen in einem überwachten geöffneten Schwimmbad fallen auf die gewählte Schwelle oder darunter.",
+        "es": "Las personas en una piscina vigilada abierta bajan al umbral elegido o por debajo."
+      },
+      "fields": [
+        {
+          "key": "pool",
+          "type": "multi_select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Pools",
+            "fr": "Piscines",
+            "de": "Schwimmbäder",
+            "es": "Piscinas"
+          },
+          "description": {
+            "en": "Empty: any watched pool.",
+            "fr": "Vide : n'importe quelle piscine suivie.",
+            "de": "Leer: jedes überwachte Schwimmbad.",
+            "es": "Vacío: cualquier piscina vigilada."
+          }
+        },
+        {
+          "key": "threshold",
+          "type": "select",
+          "required": true,
+          "label": {
+            "en": "Threshold (people)",
+            "fr": "Seuil (personnes)",
+            "de": "Schwelle (Personen)",
+            "es": "Umbral (personas)"
+          },
+          "options": [
+            {
+              "value": "20",
+              "label": {
+                "en": "20",
+                "fr": "20",
+                "de": "20",
+                "es": "20"
+              }
+            },
+            {
+              "value": "50",
+              "label": {
+                "en": "50",
+                "fr": "50",
+                "de": "50",
+                "es": "50"
+              }
+            },
+            {
+              "value": "100",
+              "label": {
+                "en": "100",
+                "fr": "100",
+                "de": "100",
+                "es": "100"
+              }
+            },
+            {
+              "value": "150",
+              "label": {
+                "en": "150",
+                "fr": "150",
+                "de": "150",
+                "es": "150"
+              }
+            },
+            {
+              "value": "200",
+              "label": {
+                "en": "200",
+                "fr": "200",
+                "de": "200",
+                "es": "200"
+              }
+            },
+            {
+              "value": "300",
+              "label": {
+                "en": "300",
+                "fr": "300",
+                "de": "300",
+                "es": "300"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "pool_name",
+          "type": "string",
+          "label": {
+            "en": "Pool",
+            "fr": "Piscine",
+            "de": "Schwimmbad",
+            "es": "Piscina"
+          }
+        },
+        {
+          "key": "city",
+          "type": "string",
+          "label": {
+            "en": "City",
+            "fr": "Ville",
+            "de": "Stadt",
+            "es": "Ciudad"
+          }
+        },
+        {
+          "key": "people",
+          "type": "number",
+          "label": {
+            "en": "People inside",
+            "fr": "Personnes présentes",
+            "de": "Anwesende Personen",
+            "es": "Personas presentes"
+          }
+        },
+        {
+          "key": "occupancy",
+          "type": "number",
+          "label": {
+            "en": "Occupancy (%, 0 if unknown)",
+            "fr": "Taux d'occupation (%, 0 si inconnu)",
+            "de": "Auslastung (%, 0 wenn unbekannt)",
+            "es": "Ocupación (%, 0 si se desconoce)"
+          }
         }
       ]
     }
   ],
   "scene_actions": [
     {
-      "key": "identify_device",
-      "label": { "en": "Identify a device", "fr": "Identifier un appareil" },
+      "key": "pools_summary",
+      "label": {
+        "en": "Get the crowd of the pools",
+        "fr": "Obtenir l'affluence des piscines",
+        "de": "Andrang der Schwimmbäder abrufen",
+        "es": "Obtener la afluencia de las piscinas"
+      },
       "description": {
-        "en": "Make a device signal itself (the demo light blinks).",
-        "fr": "Fait se signaler un appareil (la lampe de démonstration clignote)."
+        "en": "Your watched pools in a sentence ready to send: open or closed, people inside, closing time.",
+        "fr": "Vos piscines suivies en une phrase prête à envoyer : ouverte ou fermée, personnes présentes, heure de fermeture.",
+        "de": "Deine überwachten Schwimmbäder in einem fertigen Satz: geöffnet oder geschlossen, Personen, Schließzeit.",
+        "es": "Sus piscinas vigiladas en una frase lista para enviar: abierta o cerrada, personas presentes, hora de cierre."
       },
       "timeout_seconds": 15,
       "fields": [
         {
-          "key": "device",
-          "type": "select",
+          "key": "pools",
+          "type": "multi_select",
           "source": "devices",
-          "label": { "en": "Device", "fr": "Appareil" },
-          "required": true
+          "required": false,
+          "label": {
+            "en": "Pools",
+            "fr": "Piscines",
+            "de": "Schwimmbäder",
+            "es": "Piscinas"
+          },
+          "description": {
+            "en": "Empty: every watched pool.",
+            "fr": "Vide : toutes les piscines suivies.",
+            "de": "Leer: alle überwachten Schwimmbäder.",
+            "es": "Vacío: todas las piscinas vigiladas."
+          }
         }
       ],
       "outputs": [
         {
-          "key": "signalled",
-          "type": "boolean",
-          "label": { "en": "Device signalled", "fr": "Appareil signalé" }
+          "key": "sentence",
+          "type": "string",
+          "label": {
+            "en": "Sentence",
+            "fr": "Phrase",
+            "de": "Satz",
+            "es": "Frase"
+          }
+        },
+        {
+          "key": "open_count",
+          "type": "number",
+          "label": {
+            "en": "Pools open (Strasbourg)",
+            "fr": "Piscines ouvertes (Strasbourg)",
+            "de": "Geöffnete Schwimmbäder (Straßburg)",
+            "es": "Piscinas abiertas (Estrasburgo)"
+          }
+        },
+        {
+          "key": "people",
+          "type": "number",
+          "label": {
+            "en": "People inside, in total",
+            "fr": "Personnes présentes, au total",
+            "de": "Anwesende Personen insgesamt",
+            "es": "Personas presentes en total"
+          }
         }
       ]
     }
   ],
   "widgets": [
     {
-      "key": "demo_status",
-      "label": { "en": "Demo status", "fr": "État de la démo" },
-      "description": {
-        "en": "Live temperature and plug power, plug connection and observed location.",
-        "fr": "Température et puissance en direct, connexion de la prise, position observée."
+      "key": "pools",
+      "label": {
+        "en": "Swimming pools",
+        "fr": "Piscines",
+        "de": "Schwimmbäder",
+        "es": "Piscinas"
       },
-      "icon": "activity",
-      "action_timeout_seconds": 15
+      "description": {
+        "en": "Crowd and today's hours of your pools, colored by how busy they are.",
+        "fr": "Affluence et horaires du jour de vos piscines, en couleur selon la fréquentation.",
+        "de": "Andrang und heutige Öffnungszeiten deiner Schwimmbäder, farbig nach Auslastung.",
+        "es": "Afluencia y horario de hoy de sus piscinas, en color según la ocupación."
+      },
+      "icon": "droplet",
+      "settings": [
+        {
+          "key": "pools",
+          "type": "multi_select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Pools shown",
+            "fr": "Piscines affichées",
+            "de": "Angezeigte Schwimmbäder",
+            "es": "Piscinas mostradas"
+          },
+          "description": {
+            "en": "Empty: every watched pool (10 at most).",
+            "fr": "Vide : toutes les piscines suivies (10 au plus).",
+            "de": "Leer: alle überwachten Schwimmbäder (höchstens 10).",
+            "es": "Vacío: todas las piscinas vigiladas (10 como máximo)."
+          }
+        },
+        {
+          "key": "show_hours",
+          "type": "boolean",
+          "default": true,
+          "required": false,
+          "label": {
+            "en": "Show the opening hours",
+            "fr": "Afficher les horaires",
+            "de": "Öffnungszeiten anzeigen",
+            "es": "Mostrar el horario"
+          }
+        }
+      ]
     }
   ]
 }

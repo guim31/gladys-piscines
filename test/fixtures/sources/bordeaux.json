@@ -1,0 +1,75 @@
+{
+  "total_count": 7,
+  "results": [
+    {
+      "fmizonlib": "Est",
+      "fmizonnum": 8,
+      "fmizonmax": 500,
+      "datemiseajour": "2026-10-29T00:35:00+00:00",
+      "entree": 0,
+      "sortie": 0,
+      "fmicourante": 0,
+      "etablissement_etalib": "Piscine Judaique - Jean Boiteux"
+    },
+    {
+      "fmizonlib": "Zone Bassins",
+      "fmizonnum": 12,
+      "fmizonmax": 400,
+      "datemiseajour": "2026-10-29T00:35:00+00:00",
+      "entree": 0,
+      "sortie": 0,
+      "fmicourante": 0,
+      "etablissement_etalib": "Piscine Galin"
+    },
+    {
+      "fmizonlib": "ZONE GENERALE",
+      "fmizonnum": 24,
+      "fmizonmax": 200,
+      "datemiseajour": "2026-10-29T00:35:00+00:00",
+      "entree": 0,
+      "sortie": 0,
+      "fmicourante": 0,
+      "etablissement_etalib": "Piscine Jean ZAY"
+    },
+    {
+      "fmizonlib": "Ouest",
+      "fmizonnum": 1,
+      "fmizonmax": 500,
+      "datemiseajour": "2026-10-29T00:35:00+00:00",
+      "entree": 0,
+      "sortie": 0,
+      "fmicourante": 0,
+      "etablissement_etalib": "Piscine Judaique - Jean Boiteux"
+    },
+    {
+      "fmizonlib": "Zone G\u00e9n\u00e9rale",
+      "fmizonnum": 9,
+      "fmizonmax": 342,
+      "datemiseajour": "2026-10-29T00:35:00+00:00",
+      "entree": 0,
+      "sortie": 0,
+      "fmicourante": 0,
+      "etablissement_etalib": "Piscine Tissot"
+    },
+    {
+      "fmizonlib": "Zone Gradins",
+      "fmizonnum": 21,
+      "fmizonmax": 85,
+      "datemiseajour": "2026-10-29T00:35:00+00:00",
+      "entree": 0,
+      "sortie": 0,
+      "fmicourante": 0,
+      "etablissement_etalib": "Piscine Galin"
+    },
+    {
+      "fmizonlib": "Zone G\u00e9n\u00e9rale",
+      "fmizonnum": 14,
+      "fmizonmax": 220,
+      "datemiseajour": "2026-10-29T00:35:00+00:00",
+      "entree": 0,
+      "sortie": 0,
+      "fmicourante": 0,
+      "etablissement_etalib": "Piscine Grand Parc"
+    }
+  ]
+}

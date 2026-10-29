@@ -1,0 +1,85 @@
+{
+  "total_count": 8,
+  "results": [
+    {
+      "name": "Centre nautique de Schiltigheim",
+      "sigid": "401_SPO_2",
+      "realtimestatus": "CLOSED",
+      "isopen": 0,
+      "occupation": null,
+      "dayschedule": "[{\"closingMinute\": 30, \"openingHour\": 8, \"closingHour\": 19, \"openingMinute\": 0}]",
+      "updatedate": "2026-10-29 01:28:22",
+      "types": "Cat_06_05"
+    },
+    {
+      "name": "Piscine de Hautepierre",
+      "sigid": "402_SPO_3",
+      "realtimestatus": "CLOSED",
+      "isopen": 0,
+      "occupation": null,
+      "dayschedule": "[{\"closingMinute\": 0, \"openingHour\": 7, \"closingHour\": 20, \"openingMinute\": 0}]",
+      "updatedate": "2026-10-29 01:28:22",
+      "types": "Cat_06_05"
+    },
+    {
+      "name": "Piscine de la Hardt",
+      "sigid": "403_SPO_4",
+      "realtimestatus": "CLOSED",
+      "isopen": 0,
+      "occupation": null,
+      "dayschedule": null,
+      "updatedate": "2026-10-29 01:28:22",
+      "types": "Cat_06_05"
+    },
+    {
+      "name": "Piscine de la Kibitzenau",
+      "sigid": "404_SPO_5",
+      "realtimestatus": "CLOSED",
+      "isopen": 0,
+      "occupation": null,
+      "dayschedule": "[{\"closingMinute\": 0, \"openingHour\": 8, \"closingHour\": 19, \"openingMinute\": 0}]",
+      "updatedate": "2026-10-29 01:28:22",
+      "types": "Cat_06_05"
+    },
+    {
+      "name": "Piscine de la Robertsau",
+      "sigid": "405_SPO_6",
+      "realtimestatus": "CLOSED",
+      "isopen": 0,
+      "occupation": null,
+      "dayschedule": "[{\"closingMinute\": 0, \"openingHour\": 12, \"closingHour\": 18, \"openingMinute\": 30}]",
+      "updatedate": "2026-10-29 01:28:22",
+      "types": "Cat_06_05"
+    },
+    {
+      "name": "Piscine de Lingolsheim",
+      "sigid": "406_SPO_7",
+      "realtimestatus": "CLOSED",
+      "isopen": 0,
+      "occupation": null,
+      "dayschedule": "[{\"closingMinute\": 0, \"openingHour\": 8, \"closingHour\": 12, \"openingMinute\": 30}, {\"closingMinute\": 0, \"openingHour\": 14, \"closingHour\": 19, \"openingMinute\": 0}, {\"closingMinute\": 30, \"openingHour\": 19, \"closingHour\": 21, \"openingMinute\": 30}]",
+      "updatedate": "2026-10-29 01:28:22",
+      "types": "Cat_06_05"
+    },
+    {
+      "name": "Piscine d'Ostwald",
+      "sigid": "407_SPO_8",
+      "realtimestatus": "CLOSED",
+      "isopen": 0,
+      "occupation": null,
+      "dayschedule": null,
+      "updatedate": "2026-10-29 01:28:22",
+      "types": "Cat_06_05"
+    },
+    {
+      "name": "Piscine du Wacken",
+      "sigid": "408_SPO_9",
+      "realtimestatus": "CLOSED",
+      "isopen": 0,
+      "occupation": null,
+      "dayschedule": "[{\"closingMinute\": 30, \"openingHour\": 7, \"closingHour\": 14, \"openingMinute\": 0}, {\"closingMinute\": 0, \"openingHour\": 16, \"closingHour\": 20, \"openingMinute\": 0}]",
+      "updatedate": "2026-10-29 01:28:22",
+      "types": "Cat_06_05"
+    }
+  ]
+}

@@ -284,6 +284,8 @@ les tests (`openStrasbourg`, `countBordeaux` de `test/helpers/world.js`).
   par `Intl` (fuseau `Europe/Paris`, pas le `TZ` du conteneur), testées hiver et été.
 - Déclencheurs : seuils en **personnes** (20 à 300), communs aux deux villes ; un événement par seuil
   franchi, à la réouverture le compte repart de 0. `opened`/`closed` : Strasbourg seulement.
+  Bordeaux (sans état) : une chute à 0 = fermeture ou remise à zéro nocturne, pas de `crowd_below`.
+  Une zone sans comptage rend la piscine inconnue (`people` null), jamais une somme partielle.
 - Widget : une ligne `status` par piscine, ≤ 40 caractères (« 999 pers. · très chargée · jusqu'à
   20:00 » tient tout juste) ; réglage `show_hours` pour masquer les horaires.
 - `gladys_version >=5.3.0` à cause de `countries` et `keywords`.

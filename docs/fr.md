@@ -74,7 +74,7 @@ publie la ville :
 | Âge de la donnée    | durée (minutes) | ancienneté du comptage, d'après l'heure de la ville   | oui        | oui      |
 
 **Aucune valeur n'est inventée** : Strasbourg ne publie pas de comptage quand une piscine est
-fermée (la nuit notamment). Le nombre de personnes n'est alors pas mis à jour, et l'**Affluence**
+fermée (la nuit notamment). Le nombre de personnes n'est alors pas mis à jour (la dernière valeur reste affichée), et l'**Affluence**
 indique « fermée ». L'affluence est le niveau publié par l'exploitant (vert, orange, rouge, noir),
 qui tient compte des bassins ouverts.
 
@@ -108,7 +108,7 @@ variables disponibles dans les actions suivantes : piscine, ville, personnes pr�
 d'occupation (0 si inconnu).
 
 Les déclencheurs comparent deux lectures successives : rien ne se déclenche au retour d'une panne
-du portail, ni sur une donnée périmée. À la réouverture, le comptage repart de zéro.
+du portail, ni sur une donnée périmée. À la réouverture, le comptage repart de zéro. À Bordeaux, qui ne publie pas l'état ouverte/fermée, la chute à 0 de la fermeture ne déclenche pas « Affluence sous un seuil ». Un nombre qui oscille autour d'un seuil déclenche à chaque passage.
 
 ## Action de scène
 

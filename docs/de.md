@@ -73,7 +73,7 @@ was die Stadt veröffentlicht:
 | Alter der Daten        | Dauer (Minuten) | Alter der Zählung, nach der Zeitangabe der Stadt      | ja        | ja       |
 
 **Kein Wert wird erfunden**: Straßburg veröffentlicht keine Zählung, solange ein Bad geschlossen
-ist (vor allem nachts). Die Personenzahl wird dann nicht aktualisiert, und **Andrang** zeigt
+ist (vor allem nachts). Die Personenzahl wird dann nicht aktualisiert (der letzte Wert bleibt sichtbar), und **Andrang** zeigt
 „geschlossen“. Der Andrang ist die vom Betreiber veröffentlichte Stufe (grün, orange, rot,
 schwarz), die die geöffneten Becken berücksichtigt.
 
@@ -106,7 +106,7 @@ Das Feld **Schwimmbäder** filtert die betroffenen Bäder; leer: jedes überwach
 die folgenden Aktionen: Schwimmbad, Stadt, anwesende Personen, Auslastung (0 wenn unbekannt).
 
 Die Auslöser vergleichen zwei aufeinanderfolgende Abfragen: Nach einem Ausfall des Portals und bei
-veralteten Daten wird nichts ausgelöst. Bei einer Wiedereröffnung beginnt die Zählung bei null.
+veralteten Daten wird nichts ausgelöst. Bei einer Wiedereröffnung beginnt die Zählung bei null. In Bordeaux, das den Zustand geöffnet/geschlossen nicht veröffentlicht, löst der Abfall auf 0 bei der Schließung „Andrang unter einer Schwelle“ nicht aus. Eine Zahl, die um eine Schwelle schwankt, löst bei jedem Überschreiten aus.
 
 ## Szenen-Aktion
 

@@ -157,7 +157,10 @@ function strasbourgReading(record) {
     // The portal leaves the count empty while the pool is closed.
     people: open === 0 ? null : int(record.occupation),
     capacity: null,
-    level: open === 1 ? (STRASBOURG_LEVELS[record.realtimestatus] ?? null) : null,
+    level:
+      open === 1
+        ? (STRASBOURG_LEVELS[String(record.realtimestatus ?? '').toUpperCase()] ?? null)
+        : null,
     schedule: strasbourgSchedule(record.dayschedule),
     updatedAt: parisTime(record.updatedate),
   };
@@ -185,8 +188,12 @@ export function bordeauxReadings(records) {
       schedule: null,
       updatedAt: null,
     };
+    // A zone without a count makes the whole pool unknown: a partial sum
+    // would be a fake drop of the crowd.
     const people = int(record.fmicourante);
-    if (people !== null) {
+    if (people === null) {
+      pool.missing = true;
+    } else {
       pool.people = (pool.people ?? 0) + people;
     }
     const capacity = int(record.fmizonmax);
@@ -199,7 +206,9 @@ export function bordeauxReadings(records) {
     }
     pools.set(name, pool);
   }
-  return [...pools.values()];
+  return [...pools.values()].map(({ missing, ...pool }) =>
+    missing ? { ...pool, people: null } : pool,
+  );
 }
 
 export const SOURCES = {

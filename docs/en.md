@@ -71,7 +71,7 @@ Every pool added is a read-only device. Its features depend on what the city pub
 | Data age      | duration (minutes) | age of the count, from the time given by the city | yes        | yes      |
 
 **No value is ever invented**: Strasbourg publishes no count while a pool is closed (at night
-especially). The number of people is then not updated, and **Crowd** says "closed". The crowd is
+especially). The number of people is then not updated (the last value stays shown), and **Crowd** says "closed". The crowd is
 the level published by the operator (green, orange, red, black), which accounts for the pools
 open.
 
@@ -103,7 +103,7 @@ The **Pools** field filters the pools concerned; empty, any watched pool. Variab
 the next actions: pool, city, people inside, occupancy (0 if unknown).
 
 The triggers compare two successive readings: nothing fires when a portal comes back after an
-outage, nor on out of date data. At a reopening, the count starts from zero.
+outage, nor on out of date data. At a reopening, the count starts from zero. In Bordeaux, which does not publish the open/closed state, the drop to 0 at closing does not fire "Crowd below a threshold". A number oscillating around a threshold fires at every crossing.
 
 ## Scene action
 

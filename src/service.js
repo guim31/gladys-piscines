@@ -409,6 +409,11 @@ export class Pools {
     if (after.people === null || after.open === 0) {
       return events;
     }
+    // Without an open state (Bordeaux), a count falling to 0 is the closing
+    // or the nightly reset, not a quiet moment.
+    if (!city.source.hasOpen && after.people === 0) {
+      return events;
+    }
     const from = before.open === 0 ? 0 : before.people;
     if (from === null) {
       return events;

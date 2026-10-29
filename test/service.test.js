@@ -63,6 +63,21 @@ test('a Bordeaux pool: count, capacity and occupancy', async (t) => {
   await cycle(world);
   assert.equal(last('people'), 120);
   assert.equal(last('occupancy'), 30);
+  countBordeaux(world, 'Piscine Galin', 40);
+  await cycle(world);
+  // Bordeaux has no open state: the drop to 0 at closing is not a quiet moment.
+  countBordeaux(world, 'Piscine Galin', 0);
+  await cycle(world);
+  assert.deepEqual(
+    world.fake.sceneEvents.map((e) => [e.key, e.data.threshold]),
+    [
+      ['crowd_above', '20'],
+      ['crowd_above', '50'],
+      ['crowd_above', '100'],
+      ['crowd_below', '50'],
+      ['crowd_below', '100'],
+    ],
+  );
 });
 
 test('triggers: opens, crowd above then below a threshold, closes', async (t) => {

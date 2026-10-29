@@ -46,7 +46,7 @@ test('Strasbourg: the eight pools, closed at night, without any count', async ()
 
 test('Strasbourg: an open pool gives its count and the operator level', async () => {
   const document = fixtureJson('strasbourg.json');
-  Object.assign(document.results[7], { isopen: 1, occupation: 85, realtimestatus: 'ORANGE' });
+  Object.assign(document.results[7], { isopen: 1, occupation: 85, realtimestatus: 'Orange' });
   const url = Object.keys(createFetch().routes).find((u) => u.includes('strasbourg'));
   const { byName } = await read('strasbourg', { [url]: document });
   const wacken = byName('Wacken');
@@ -73,14 +73,18 @@ test('Bordeaux: zones added up per pool, stands left out', async () => {
   assert.equal(byName('Tissot').updatedAt, Date.UTC(2026, 9, 29, 0, 35, 0));
 });
 
-test('Bordeaux: a negative or missing zone count is never a negative pool count', () => {
+test('Bordeaux: a negative zone count counts 0, a missing one makes the pool unknown', () => {
   const [pool] = bordeauxReadings([
     { etablissement_etalib: 'P', fmizonlib: 'A', fmicourante: -3, fmizonmax: 100 },
     { etablissement_etalib: 'P', fmizonlib: 'B', fmicourante: 12, fmizonmax: 50 },
-    { etablissement_etalib: 'P', fmizonlib: 'C', fmicourante: null, fmizonmax: null },
   ]);
   assert.equal(pool.people, 12);
   assert.equal(pool.capacity, 150);
+  const [partial] = bordeauxReadings([
+    { etablissement_etalib: 'P', fmizonlib: 'A', fmicourante: 5, fmizonmax: 100 },
+    { etablissement_etalib: 'P', fmizonlib: 'B', fmicourante: null, fmizonmax: 100 },
+  ]);
+  assert.equal(partial.people, null, 'no partial sum');
   const [empty] = bordeauxReadings([{ etablissement_etalib: 'Q', fmicourante: null }]);
   assert.equal(empty.people, null);
 });

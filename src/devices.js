@@ -26,7 +26,7 @@ import { NAMES, TEXT, say } from './messages.js';
 export const POOL_TYPE = 'pool';
 export const MAX_DEVICE_NAME = 80;
 export const MAX_AGE_MINUTES = 1440;
-// Display bound of the count when the city gives no capacity.
+// Display bound of the counts, up to that capacity.
 export const DEFAULT_COUNT_MAX = 1000;
 // Text features take `{ text }` states, never `{ state }`.
 export const TEXT_FEATURES = new Set(['crowd', 'hours']);
@@ -67,9 +67,12 @@ export function prettyName(name) {
     .join('');
 }
 
-/** Display bound of the counters: the capacity rounded up to the hundred. */
+/**
+ * Display bound of the counters: 1000, or the capacity rounded up to the
+ * thousand, so that a capacity changed by a few people keeps the structure.
+ */
 export const countMax = (capacity) =>
-  capacity ? Math.max(100, Math.ceil(capacity / 100) * 100) : DEFAULT_COUNT_MAX;
+  capacity > DEFAULT_COUNT_MAX ? Math.ceil(capacity / 1000) * 1000 : DEFAULT_COUNT_MAX;
 
 /** The feature keys of a pool of this source. */
 export const featureKeys = (source) => [
@@ -107,7 +110,7 @@ export function crowdText(reading, language) {
   if (reading.level) {
     return say(TEXT, language, `level_${reading.level}`);
   }
-  return say(TEXT, language, 'noCount');
+  return reading.people === null ? say(TEXT, language, 'noCount') : say(TEXT, language, 'open');
 }
 
 /**

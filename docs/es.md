@@ -75,7 +75,7 @@ ciudad:
 | Antigüedad del dato | duración (minutos) | antigüedad del recuento, según la hora de la ciudad        | sí          | sí      |
 
 **Ningún valor se inventa**: Estrasburgo no publica recuento mientras una piscina está cerrada
-(sobre todo de noche). El número de personas no se actualiza entonces, y **Afluencia** indica
+(sobre todo de noche). El número de personas no se actualiza entonces (el último valor sigue visible), y **Afluencia** indica
 «cerrada». La afluencia es el nivel publicado por el operador (verde, naranja, rojo, negro), que
 tiene en cuenta los vasos abiertos.
 
@@ -109,7 +109,7 @@ disponibles en las acciones siguientes: piscina, ciudad, personas presentes, ocu
 desconoce).
 
 Los disparadores comparan dos lecturas sucesivas: nada se dispara al volver un portal tras una
-avería, ni con un dato caducado. Al reabrir, el recuento parte de cero.
+avería, ni con un dato caducado. Al reabrir, el recuento parte de cero. En Burdeos, que no publica el estado abierta/cerrada, la caída a 0 al cierre no dispara «Afluencia por debajo de un umbral». Un número que oscila alrededor de un umbral dispara en cada paso.
 
 ## Acción de escena
 

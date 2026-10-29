@@ -125,7 +125,7 @@ export const TEXT = {
     sentence: ({ name, people, capacity, crowd, until }) =>
       `${name}: ${people} ${plural(people, 'Person', 'Personen')}${capacity ? ` von ${capacity}` : ''}${crowd ? ` (${crowd})` : ''}${until ? `, geöffnet bis ${until}` : ''}.`,
     pickPool:
-      'Füge ein Schwimmbad oder eine Eisbahn im Tab „Entdecken“ der Integration hinzu und wähle es hier.',
+      'Füge ein Schwimmbad oder eine Eisbahn im Tab „Entdecken“ der Integration hinzu und wähle die Einrichtung hier.',
     gone: 'Diese Einrichtung wird nicht mehr überwacht.',
     noPool:
       'Nichts wird überwacht: füge ein Schwimmbad oder eine Eisbahn im Tab „Entdecken“ der Integration hinzu.',

@@ -349,7 +349,9 @@ export class Pools {
         logger.info(`${city.label}: data back`);
       }
       city.error = null;
-      logger.debug(`${city.label}: ${readings.length} pools read`);
+      logger.debug(
+        `${city.label}: ${readings.length} ${city.source.kind === 'rink' ? 'rinks' : 'pools'} read`,
+      );
       return true;
     } catch (err) {
       if (!city.error) {

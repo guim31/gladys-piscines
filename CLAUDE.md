@@ -31,16 +31,21 @@ pushing.
 ## Architecture
 
 ```
-index.js                          SDK wiring only: handlers registered before connect()
-src/devices/index.js              registry of the device blueprints + dispatch helpers
-src/devices/<type>.js             one device type per file (buildDevice, onPoll, onSetValue...)
-src/scenes.js                     scene action handlers (manifest `scene_actions`)
-src/widgets.js                    dashboard widget handlers (manifest `widgets`)
+index.js                          SDK wiring only: registerHandlers() then connect()
+src/app.js                        every SDK handler -> service; configuration action
+src/service.js                    cities read, timer, discovery, states, triggers, texts, status
+src/sources.js                    one adapter per open data portal -> common reading; Paris time
+src/devices.js                    the Gladys device of a pool, its states
+src/scenes.js                     scene action handler (manifest `scene_actions`)
+src/widgets.js                    dashboard widget handler (manifest `widgets`)
+src/http.js                       downloads: timeouts, size caps
+src/messages.js                   texts sent from the container (en, fr, de, es)
 src/config.js                     DEFAULT_CONFIG (mirrors the manifest defaults) + normalization
-src/weather.js                    example driver (Open-Meteo)
-gladys-assistant-integration.json manifest: name, config_schema, actions, image...
-docs/en.md, docs/fr.md            user documentation, re-hosted by Gladys (mandatory)
+gladys-assistant-integration.json manifest: config, action, widget, scene triggers and action
+docs/{en,fr,de,es}.md             user documentation, re-hosted by Gladys (en and fr mandatory)
 test/                             node --test, against the SDK's fake Gladys (integration-sdk/testing)
+test/helpers/world.js             fake Gladys + fake fetch on the fixtures + manual clock
+test/fixtures/sources             real answers of the two portals (2026-10-29), index.json = URL -> file
 .github/scripts/release.mjs       release helpers (manifest bump, changelog), tested in test/
 ```
 
@@ -250,3 +255,35 @@ long, et sur un « Sie »/« Ihr… » de politesse en allemand. Le store exige 
 - Docs `en`, `fr`, `de`, `es` avec les mêmes sections.
 - Chauffe, ouverture, sécurité : ne rien rendre pilotable « comme un thermostat » ou par un assistant
   vocal quand une erreur serait dangereuse (leçon d'OctoPrint).
+
+# Intégration Piscines (notes de développement, 29/10/2026)
+
+## Sources vérifiées en direct (29/10/2026)
+
+| Clé (figée)  | Portail                                                             | Particularités                                                                                                           |
+| ------------ | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `strasbourg` | data.strasbourg.eu `frequentation-en-temps-reel-des-piscines` (ODS) | `isopen`, `occupation` vide si fermée, `realtimestatus`, `dayschedule` JSON, `updatedate` heure de Paris **sans fuseau** |
+| `bordeaux`   | opendata.bordeaux-metropole.fr `bor_frequentation_piscine_tr` (ODS) | une ligne par **zone** ; pas d'identifiant d'établissement (nom), ni état ni horaires                                    |
+
+Écartées (données statiques seulement, 29/10) : Nantes (`244400404_piscines-nantes-metropole`),
+Toulouse (`piscines`), Paris, Rennes, Lille, Lyon ; Montpellier (`portail-api-data`) en 503. Les
+fixtures sont prises **de nuit** (toutes fermées, comptes à 0) : les cas de jour sont dérivés dans
+les tests (`openStrasbourg`, `countBordeaux` de `test/helpers/world.js`).
+
+## Choix et pièges
+
+- Même architecture que gladys-parkings : villes cochées, l'onglet Découverte sert de liste, les
+  piscines « suivies » sont les appareils créés. Bordeaux : `external_id` construit sur le **nom**
+  de l'établissement (le portail n'a pas d'identifiant) ; les zones « Gradins » (spectateurs) sont
+  exclues du compte et de la capacité.
+- **Pas de valeur inventée** (consigne) : piscine fermée à Strasbourg → `people` non publié,
+  `crowd` = « fermée ». Bordeaux publie 0 la nuit : c'est sa valeur, on la publie.
+- `crowd` et `hours` sont des `text/text` : états `{ text }`, jamais `{ state }`. Ils suivent la
+  langue de la config : changer de langue oublie les états publiés pour les republier.
+- Heures : `updatedate` et `dayschedule` de Strasbourg sont des heures murales de Paris. Converties
+  par `Intl` (fuseau `Europe/Paris`, pas le `TZ` du conteneur), testées hiver et été.
+- Déclencheurs : seuils en **personnes** (20 à 300), communs aux deux villes ; un événement par seuil
+  franchi, à la réouverture le compte repart de 0. `opened`/`closed` : Strasbourg seulement.
+- Widget : une ligne `status` par piscine, ≤ 40 caractères (« 999 pers. · très chargée · jusqu'à
+  20:00 » tient tout juste) ; réglage `show_hours` pour masquer les horaires.
+- `gladys_version >=5.3.0` à cause de `countries` et `keywords`.

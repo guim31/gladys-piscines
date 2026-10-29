@@ -1,61 +1,163 @@
-# Demo Devices Template
+# Piscines en temps réel
 
-This is the user documentation of the integration. Gladys re-hosts this file
-and shows a permanent **Documentation** link to it in the Configuration screen
-(in the user's language, with English as the fallback) — it is when
-configuring that the user needs it most. Keep the short onboarding hints in
-the `section` blocks of the manifest `config_schema`; put the long
-step-by-step (screenshots, troubleshooting…) here.
+The **crowd and opening of the public swimming pools** of French cities, read live from their
+open data portals: the pools of the Eurométropole de Strasbourg and those of the city of Bordeaux.
+**No account, no key.**
+
+Unofficial integration, not affiliated with the cities, the métropoles nor the pool operators.
+Developed without access to the facilities: the sources were checked live on 2026-10-29 (at night,
+pools closed). Feedback welcome.
 
 ## What you get
 
-Six demo devices show up after installation: a weather station (real data
-from Open-Meteo), a switch, a dimmable light, a smart plug with power
-metering, a motion sensor and a camera.
+- One **device per pool** you add: open or closed, people inside, capacity and occupancy, crowd
+  level, today's hours and data age (depending on the city).
+- A **widget** "Swimming pools": your pools on one row each, with the crowd and the closing time,
+  in green, orange or red depending on how busy they are.
+- Four **scene triggers**: the pool opens, the pool closes, the crowd rises above a threshold, the
+  crowd drops below a threshold.
+- One **scene action**: the state of your pools in a sentence ready to send.
+
+## Requirements
+
+- Gladys Assistant **5.3.0** or later.
+- Internet access from Gladys: the data comes from the open data portals of the cities.
+- No account, no API key.
+
+## Installation
+
+1. In Gladys, open **Integrations → Install from GitHub**.
+2. Paste `https://github.com/guim31/gladys-piscines` and confirm.
+3. Open the integration once installed: the **Configuration** tab shows up.
 
 ## Configuration
 
-1. Open the **Configuration** tab of the integration.
-2. Set the **latitude** and **longitude** the demo weather station should
-   observe (they default to Paris), and pick your temperature unit.
-   The **refresh interval** sets how often the weather station and the
-   plug's power are read: every 5 minutes by default, every minute at most.
-3. Save: the devices appear in the **Discovery** tab, ready to be added.
+### Settings
 
-The **Prefer the local connection** toggle drives the demo plug: it reports
-the channel it actually uses as a badge (local or cloud), with an orange dot
-when it runs degraded (local refused, cloud fallback).
+| Setting                        | Effect                                                                     |
+| ------------------------------ | -------------------------------------------------------------------------- |
+| Cities                         | the cities whose pools are offered in the Discover tab                     |
+| Refresh                        | every 3, 5 (default) or 10 minutes                                         |
+| Language of names and messages | language of the feature names, the texts, the widget and the scene phrases |
 
-## Actions
+Feature names are fixed when a device is added: choose the language first.
 
-- **Test the weather provider** — performs a live request to Open-Meteo and
-  shows the current temperature and humidity under the button.
-- **Identify a device** — pick one of your devices in the list and it will
-  signal itself (the demo light "blinks" in the logs).
+### Adding pools
 
-## Scenes
+1. Tick one or more cities, then save.
+2. Open the **Discover** tab: the pools of these cities show up there, as "City · Pool".
+3. Add the ones you want to Gladys. Their values arrive right away.
 
-The integration adds its own cards to the scene editor (Gladys 5.1 or
-later), under the **Integrations** category:
+The pools added are the **watched pools**: the widget, the triggers and the scene action offer
+them. An added pool keeps being read even if you untick its city afterwards.
 
-- **Motion detected** (trigger) — starts the scene when a demo motion sensor
-  sees something move. Optionally pick the sensor and what moved (person,
-  animal); left empty, any detection matches. The following actions can
-  read what moved with `{{triggerEvent.data.target}}`.
-- **Identify a device** (action) — makes the chosen device signal itself.
-  It returns whether the device could signal itself, so the following
-  actions can depend on it.
+### Checking
 
-## Dashboard
+The **Status** action of the Configuration tab lists the cities read, the number of pools found,
+the time of the last reading, the last error if any and the number of pools added.
 
-Add the **Demo status** widget to a dashboard: it shows the live
-temperature of the weather station and the power of the office plug, the
-connection the plug currently uses (orange when degraded) and the observed
-location. Its **Identify the light** button makes the demo light signal
-itself.
+## Devices
+
+Every pool added is a read-only device. Its features depend on what the city publishes:
+
+| Feature       | Gladys type        | Value                                             | Strasbourg | Bordeaux |
+| ------------- | ------------------ | ------------------------------------------------- | ---------- | -------- |
+| Open          | binary             | 1 open, 0 closed                                  | yes        | no       |
+| People inside | counter            | people in the pool                                | yes        | yes      |
+| Capacity      | counter            | people allowed at once                            | no         | yes      |
+| Occupancy     | level (%)          | people inside / capacity                          | no         | yes      |
+| Crowd         | text               | quiet, moderate, busy, full, or "closed"          | yes        | no       |
+| Today's hours | text               | for instance "07:00–14:30, 16:00–20:00"           | yes        | no       |
+| Data age      | duration (minutes) | age of the count, from the time given by the city | yes        | yes      |
+
+**No value is ever invented**: Strasbourg publishes no count while a pool is closed (at night
+especially). The number of people is then not updated, and **Crowd** says "closed". The crowd is
+the level published by the operator (green, orange, red, black), which accounts for the pools
+open.
+
+Bordeaux counts per zone: the integration adds up the zones of a pool, without the stands
+(spectators). Bordeaux publishes neither the open/closed state nor the hours.
+
+After **45 minutes** without an update from the city, the data is **out of date**.
+
+## Dashboard widget
+
+Add the **Swimming pools** widget to a dashboard. It shows one row per watched pool (ten at most),
+under the name you gave it in Gladys, for instance "85 people · quiet · until 20:00", or "closed ·
+opens at 07:00". In its settings: the pools shown (empty: all) and whether to show the hours.
+
+Colors: the operator's level in Strasbourg (**green** quiet, **orange** moderate, **red** busy or
+full); the occupancy in Bordeaux (**orange** from 70 %, **red** from 90 %); **grey** when the pool
+is closed, without a count or out of date.
+
+## Scene triggers
+
+| Trigger                 | Fires when                                                                         |
+| ----------------------- | ---------------------------------------------------------------------------------- |
+| Pool opens              | the pool goes from closed to open (Strasbourg)                                     |
+| Pool closes             | the pool goes from open to closed (Strasbourg)                                     |
+| Crowd above a threshold | the number of people rises above the chosen threshold (20, 50, 100, 150, 200, 300) |
+| Crowd below a threshold | the number of people of an open pool drops to the chosen threshold or below        |
+
+The **Pools** field filters the pools concerned; empty, any watched pool. Variables available in
+the next actions: pool, city, people inside, occupancy (0 if unknown).
+
+The triggers compare two successive readings: nothing fires when a portal comes back after an
+outage, nor on out of date data. At a reopening, the count starts from zero.
+
+## Scene action
+
+**Get the crowd of the pools**: your watched pools (or the ones picked) in a sentence. Outputs:
+
+- `sentence`: "Piscine du Wacken: 85 people (quiet), open until 20:00. Piscine de Hautepierre:
+  closed.";
+- `open_count`: number of pools open (cities that publish the state);
+- `people`: total of the people inside.
+
+The sentence follows the language chosen in the configuration.
+
+## Scene examples
+
+- **Before going for a swim**: a button or a fixed time, action "Get the crowd of the pools", then
+  "Send a message" with `sentence`.
+- **Quiet slot**: trigger "Crowd below a threshold" (your pool, threshold 50), then a notification
+  "Now is a good time to go".
+- **Pool open**: trigger "Pool opens" on Saturday morning, then a message.
+
+## Data and refresh
+
+| City       | Portal                                        | Dataset                                       | License         |
+| ---------- | --------------------------------------------- | --------------------------------------------- | --------------- |
+| Strasbourg | data.strasbourg.eu (Opendatasoft)             | Fréquentation en temps réel des piscines      | Licence Ouverte |
+| Bordeaux   | opendata.bordeaux-metropole.fr (Opendatasoft) | Fréquentation temps réel des piscines (ville) | Licence Ouverte |
+
+One request per city and per reading, a few kilobytes. The cities update their data every 5 to 10
+minutes; at 5 minutes, that is 288 requests a day per city, far below the quotas of the portals
+for anonymous use. Only the cities ticked and those of the pools added are read.
 
 ## Troubleshooting
 
-The integration logs everything it does: check the integration logs from the
-Gladys UI (or `docker logs` on the host) with `LOG_LEVEL=debug` for the full
-detail.
+- **No pool in Discover**: check that a city is ticked and saved, then run the **Status** action.
+  An "HTTP 503" or "timeout" error comes from the city's portal: try again later.
+- **"data out of date" in the widget**: the city has not updated this pool for more than 45
+  minutes.
+- **No number of people**: the pool is closed, or the city publishes no count right now. Nothing
+  is invented.
+- **No "Open" feature nor hours**: the city does not publish them (Bordeaux).
+- For more details, set `LOG_LEVEL=debug`: every reading is then logged.
+
+## Limitations
+
+- Only Strasbourg and Bordeaux publish the crowd of their pools live today. Nantes, Toulouse,
+  Paris, Rennes or Montpellier only publish static data (addresses, equipment): they can be added
+  if a live feed appears.
+- The figures are the operators' (counting of entries and exits): they may differ from reality,
+  especially late in the day.
+- Strasbourg gives no capacity, hence no occupancy.
+- Read-only: no booking nor payment.
+
+## Credits
+
+- Data: Eurométropole de Strasbourg and Bordeaux Métropole, under the Licence Ouverte (Etalab).
+- Built from the
+  [official integration template](https://github.com/GladysAssistant/integration-template-js).

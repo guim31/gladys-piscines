@@ -10,6 +10,14 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+### Added
+
+- Live crowd of Strasbourg's Iceberg ice rink (open data): tick "Strasbourg
+  (Iceberg ice rink)" in the configuration, then add it from the Discover tab.
+  Same device, triggers, widget and scene action as the Strasbourg pools.
+- Name and texts widened to "pools and ice rinks"; settings, keys and existing
+  devices unchanged.
+
 ## [1.0.0] - 2026-10-29
 
 ### Added

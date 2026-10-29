@@ -26,8 +26,9 @@ for (const language of LANGUAGES) {
     const world = await createWorld({ config: { language, cities: SOURCE_KEYS } });
     t.after(() => world.app.stop());
     const devices = world.fake.discoveredDevices;
-    // Every pool of the capture of 2026-10-29: 8 in Strasbourg, 5 in Bordeaux.
-    assert.equal(devices.length, 8 + 5);
+    // Every facility of the capture of 2026-10-29: 8 pools in Strasbourg, 5 in
+    // Bordeaux, the Iceberg ice rink in Strasbourg.
+    assert.equal(devices.length, 8 + 5 + 1);
     for (const key of SOURCE_KEYS) {
       assert.ok(
         devices.some((device) => device.params.some((p) => p.value === key)),

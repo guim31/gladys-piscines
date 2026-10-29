@@ -1,12 +1,12 @@
 {
   "manifest_version": 1,
   "type": "device",
-  "name": "Piscines en temps réel",
+  "name": "Piscines et patinoires",
   "description": {
-    "en": "Live crowd and opening of the public swimming pools of French cities (open data): Strasbourg…",
-    "fr": "Affluence et ouverture en direct des piscines municipales de villes françaises : Strasbourg…",
-    "de": "Live-Andrang und Öffnung städtischer Schwimmbäder in Frankreich (Open Data): Straßburg, Bordeaux",
-    "es": "Afluencia y apertura en directo de piscinas municipales francesas (datos abiertos): Estrasburgo…"
+    "en": "Live crowd and opening of public pools and ice rinks in French cities (open data): Strasbourg…",
+    "fr": "Affluence et ouverture en direct des piscines et patinoires municipales : Strasbourg, Bordeaux",
+    "de": "Live-Andrang städtischer Schwimmbäder und Eisbahnen in Frankreich (Open Data): Straßburg, Bordeaux",
+    "es": "Afluencia en directo de piscinas y pistas de hielo municipales francesas (datos abiertos)"
   },
   "version": "1.0.0",
   "docker_image": "ghcr.io/guim31/gladys-piscines:1.0.0",
@@ -18,6 +18,8 @@
   "keywords": [
     "piscine",
     "swimming pool",
+    "patinoire",
+    "ice rink",
     "Strasbourg",
     "Bordeaux",
     "affluence",
@@ -35,10 +37,10 @@
         "es": "Funcionamiento"
       },
       "description": {
-        "en": "Tick your cities and save: their pools appear in the Discover tab. Add the ones you want to Gladys. No account, no key.",
-        "fr": "Cochez vos villes et enregistrez : leurs piscines apparaissent dans l'onglet Découverte. Ajoutez celles qui vous intéressent à Gladys. Sans compte ni clé.",
-        "de": "Kreuze deine Städte an und speichere: ihre Schwimmbäder erscheinen im Tab „Entdecken“. Füge die gewünschten zu Gladys hinzu. Kein Konto, kein Schlüssel.",
-        "es": "Marque sus ciudades y guarde: sus piscinas aparecen en la pestaña Descubrir. Añada a Gladys las que le interesen. Sin cuenta ni clave."
+        "en": "Tick your cities and save: their pools and ice rinks appear in the Discover tab. Add the ones you want to Gladys. No account, no key.",
+        "fr": "Cochez vos villes et enregistrez : leurs piscines et patinoires apparaissent dans l'onglet Découverte. Ajoutez celles qui vous intéressent à Gladys. Sans compte ni clé.",
+        "de": "Kreuze deine Städte an und speichere: ihre Schwimmbäder und Eisbahnen erscheinen im Tab „Entdecken“. Füge die gewünschten zu Gladys hinzu. Kein Konto, kein Schlüssel.",
+        "es": "Marque sus ciudades y guarde: sus piscinas y pistas de hielo aparecen en la pestaña Descubrir. Añada a Gladys las que le interesen. Sin cuenta ni clave."
       },
       "links": [
         {
@@ -62,10 +64,10 @@
         "es": "Ciudades"
       },
       "description": {
-        "en": "Pools whose crowd is published live in open data. Others: see the guide.",
-        "fr": "Piscines dont l'affluence est publiée en direct en open data. Autres villes : voir le guide.",
-        "de": "Schwimmbäder, deren Andrang live als Open Data veröffentlicht wird. Andere Städte: siehe Anleitung.",
-        "es": "Piscinas cuya afluencia se publica en directo en datos abiertos. Otras ciudades: vea la guía."
+        "en": "Pools and ice rinks whose crowd is published live in open data. Others: see the guide.",
+        "fr": "Piscines et patinoires dont l'affluence est publiée en direct en open data. Autres villes : voir le guide.",
+        "de": "Schwimmbäder und Eisbahnen, deren Andrang live als Open Data veröffentlicht wird. Andere Städte: siehe Anleitung.",
+        "es": "Piscinas y pistas de hielo cuya afluencia se publica en directo en datos abiertos. Otras ciudades: vea la guía."
       },
       "options": [
         {
@@ -84,6 +86,15 @@
             "fr": "Bordeaux (piscines de la ville)",
             "de": "Bordeaux (städtische Bäder)",
             "es": "Burdeos (piscinas municipales)"
+          }
+        },
+        {
+          "value": "strasbourg_rink",
+          "label": {
+            "en": "Strasbourg (Iceberg ice rink)",
+            "fr": "Strasbourg (patinoire l'Iceberg)",
+            "de": "Straßburg (Eisbahn Iceberg)",
+            "es": "Estrasburgo (pista de hielo Iceberg)"
           }
         }
       ]
@@ -194,10 +205,10 @@
         "es": "Estado"
       },
       "description": {
-        "en": "Cities read, pools found, last readings and errors.",
-        "fr": "Villes lues, piscines trouvées, dernières lectures et erreurs.",
-        "de": "Gelesene Städte, gefundene Schwimmbäder, letzte Abfragen und Fehler.",
-        "es": "Ciudades leídas, piscinas encontradas, últimas lecturas y errores."
+        "en": "Cities read, pools and ice rinks found, last readings and errors.",
+        "fr": "Villes lues, piscines et patinoires trouvées, dernières lectures et erreurs.",
+        "de": "Gelesene Städte, gefundene Schwimmbäder und Eisbahnen, letzte Abfragen und Fehler.",
+        "es": "Ciudades leídas, piscinas y pistas de hielo encontradas, últimas lecturas y errores."
       },
       "timeout_seconds": 30,
       "fields": []
@@ -213,10 +224,10 @@
         "es": "La piscina abre"
       },
       "description": {
-        "en": "A watched pool opens (cities that publish the state: Strasbourg).",
-        "fr": "Une piscine suivie ouvre (villes qui publient l'état : Strasbourg).",
-        "de": "Ein überwachtes Schwimmbad öffnet (Städte, die den Zustand veröffentlichen: Straßburg).",
-        "es": "Una piscina vigilada abre (ciudades que publican el estado: Estrasburgo)."
+        "en": "A watched pool or ice rink opens (cities that publish the state: Strasbourg).",
+        "fr": "Une piscine ou patinoire suivie ouvre (villes qui publient l'état : Strasbourg).",
+        "de": "Ein überwachtes Schwimmbad oder eine Eisbahn öffnet (Städte, die den Zustand veröffentlichen: Straßburg).",
+        "es": "Una piscina o pista de hielo vigilada abre (ciudades que publican el estado: Estrasburgo)."
       },
       "fields": [
         {
@@ -225,16 +236,16 @@
           "source": "devices",
           "required": false,
           "label": {
-            "en": "Pools",
-            "fr": "Piscines",
-            "de": "Schwimmbäder",
-            "es": "Piscinas"
+            "en": "Pools and ice rinks",
+            "fr": "Piscines et patinoires",
+            "de": "Schwimmbäder und Eisbahnen",
+            "es": "Piscinas y pistas de hielo"
           },
           "description": {
-            "en": "Empty: any watched pool.",
-            "fr": "Vide : n'importe quelle piscine suivie.",
-            "de": "Leer: jedes überwachte Schwimmbad.",
-            "es": "Vacío: cualquier piscina vigilada."
+            "en": "Empty: any watched pool or ice rink.",
+            "fr": "Vide : n'importe quelle piscine ou patinoire suivie.",
+            "de": "Leer: jedes überwachte Schwimmbad und jede Eisbahn.",
+            "es": "Vacío: cualquier piscina o pista de hielo vigilada."
           }
         }
       ],
@@ -243,10 +254,10 @@
           "key": "pool_name",
           "type": "string",
           "label": {
-            "en": "Pool",
-            "fr": "Piscine",
-            "de": "Schwimmbad",
-            "es": "Piscina"
+            "en": "Facility",
+            "fr": "Équipement",
+            "de": "Einrichtung",
+            "es": "Instalación"
           }
         },
         {
@@ -290,10 +301,10 @@
         "es": "La piscina cierra"
       },
       "description": {
-        "en": "A watched pool closes (cities that publish the state: Strasbourg).",
-        "fr": "Une piscine suivie ferme (villes qui publient l'état : Strasbourg).",
-        "de": "Ein überwachtes Schwimmbad schließt (Städte, die den Zustand veröffentlichen: Straßburg).",
-        "es": "Una piscina vigilada cierra (ciudades que publican el estado: Estrasburgo)."
+        "en": "A watched pool or ice rink closes (cities that publish the state: Strasbourg).",
+        "fr": "Une piscine ou patinoire suivie ferme (villes qui publient l'état : Strasbourg).",
+        "de": "Ein überwachtes Schwimmbad oder eine Eisbahn schließt (Städte, die den Zustand veröffentlichen: Straßburg).",
+        "es": "Una piscina o pista de hielo vigilada cierra (ciudades que publican el estado: Estrasburgo)."
       },
       "fields": [
         {
@@ -302,16 +313,16 @@
           "source": "devices",
           "required": false,
           "label": {
-            "en": "Pools",
-            "fr": "Piscines",
-            "de": "Schwimmbäder",
-            "es": "Piscinas"
+            "en": "Pools and ice rinks",
+            "fr": "Piscines et patinoires",
+            "de": "Schwimmbäder und Eisbahnen",
+            "es": "Piscinas y pistas de hielo"
           },
           "description": {
-            "en": "Empty: any watched pool.",
-            "fr": "Vide : n'importe quelle piscine suivie.",
-            "de": "Leer: jedes überwachte Schwimmbad.",
-            "es": "Vacío: cualquier piscina vigilada."
+            "en": "Empty: any watched pool or ice rink.",
+            "fr": "Vide : n'importe quelle piscine ou patinoire suivie.",
+            "de": "Leer: jedes überwachte Schwimmbad und jede Eisbahn.",
+            "es": "Vacío: cualquier piscina o pista de hielo vigilada."
           }
         }
       ],
@@ -320,10 +331,10 @@
           "key": "pool_name",
           "type": "string",
           "label": {
-            "en": "Pool",
-            "fr": "Piscine",
-            "de": "Schwimmbad",
-            "es": "Piscina"
+            "en": "Facility",
+            "fr": "Équipement",
+            "de": "Einrichtung",
+            "es": "Instalación"
           }
         },
         {
@@ -367,10 +378,10 @@
         "es": "Afluencia por encima de un umbral"
       },
       "description": {
-        "en": "The people inside a watched pool rise above the chosen threshold.",
-        "fr": "Le nombre de personnes dans une piscine suivie passe au-dessus du seuil choisi.",
-        "de": "Die Personen in einem überwachten Schwimmbad steigen über die gewählte Schwelle.",
-        "es": "Las personas en una piscina vigilada superan el umbral elegido."
+        "en": "The people inside a watched pool or ice rink rise above the chosen threshold.",
+        "fr": "Le nombre de personnes dans une piscine ou patinoire suivie passe au-dessus du seuil choisi.",
+        "de": "Die Personen in einem überwachten Schwimmbad oder einer Eisbahn steigen über die gewählte Schwelle.",
+        "es": "Las personas en una piscina o pista de hielo vigilada superan el umbral elegido."
       },
       "fields": [
         {
@@ -379,16 +390,16 @@
           "source": "devices",
           "required": false,
           "label": {
-            "en": "Pools",
-            "fr": "Piscines",
-            "de": "Schwimmbäder",
-            "es": "Piscinas"
+            "en": "Pools and ice rinks",
+            "fr": "Piscines et patinoires",
+            "de": "Schwimmbäder und Eisbahnen",
+            "es": "Piscinas y pistas de hielo"
           },
           "description": {
-            "en": "Empty: any watched pool.",
-            "fr": "Vide : n'importe quelle piscine suivie.",
-            "de": "Leer: jedes überwachte Schwimmbad.",
-            "es": "Vacío: cualquier piscina vigilada."
+            "en": "Empty: any watched pool or ice rink.",
+            "fr": "Vide : n'importe quelle piscine ou patinoire suivie.",
+            "de": "Leer: jedes überwachte Schwimmbad und jede Eisbahn.",
+            "es": "Vacío: cualquier piscina o pista de hielo vigilada."
           }
         },
         {
@@ -464,10 +475,10 @@
           "key": "pool_name",
           "type": "string",
           "label": {
-            "en": "Pool",
-            "fr": "Piscine",
-            "de": "Schwimmbad",
-            "es": "Piscina"
+            "en": "Facility",
+            "fr": "Équipement",
+            "de": "Einrichtung",
+            "es": "Instalación"
           }
         },
         {
@@ -511,10 +522,10 @@
         "es": "Afluencia por debajo de un umbral"
       },
       "description": {
-        "en": "The people inside a watched open pool drop to the chosen threshold or below.",
-        "fr": "Le nombre de personnes dans une piscine suivie ouverte descend au seuil choisi ou en dessous.",
-        "de": "Die Personen in einem überwachten geöffneten Schwimmbad fallen auf die gewählte Schwelle oder darunter.",
-        "es": "Las personas en una piscina vigilada abierta bajan al umbral elegido o por debajo."
+        "en": "The people inside a watched open pool or ice rink drop to the chosen threshold or below.",
+        "fr": "Le nombre de personnes dans une piscine ou patinoire suivie ouverte descend au seuil choisi ou en dessous.",
+        "de": "Die Personen in einem überwachten geöffneten Schwimmbad oder einer Eisbahn fallen auf die gewählte Schwelle oder darunter.",
+        "es": "Las personas en una piscina o pista de hielo vigilada abierta bajan al umbral elegido o por debajo."
       },
       "fields": [
         {
@@ -523,16 +534,16 @@
           "source": "devices",
           "required": false,
           "label": {
-            "en": "Pools",
-            "fr": "Piscines",
-            "de": "Schwimmbäder",
-            "es": "Piscinas"
+            "en": "Pools and ice rinks",
+            "fr": "Piscines et patinoires",
+            "de": "Schwimmbäder und Eisbahnen",
+            "es": "Piscinas y pistas de hielo"
           },
           "description": {
-            "en": "Empty: any watched pool.",
-            "fr": "Vide : n'importe quelle piscine suivie.",
-            "de": "Leer: jedes überwachte Schwimmbad.",
-            "es": "Vacío: cualquier piscina vigilada."
+            "en": "Empty: any watched pool or ice rink.",
+            "fr": "Vide : n'importe quelle piscine ou patinoire suivie.",
+            "de": "Leer: jedes überwachte Schwimmbad und jede Eisbahn.",
+            "es": "Vacío: cualquier piscina o pista de hielo vigilada."
           }
         },
         {
@@ -608,10 +619,10 @@
           "key": "pool_name",
           "type": "string",
           "label": {
-            "en": "Pool",
-            "fr": "Piscine",
-            "de": "Schwimmbad",
-            "es": "Piscina"
+            "en": "Facility",
+            "fr": "Équipement",
+            "de": "Einrichtung",
+            "es": "Instalación"
           }
         },
         {
@@ -651,16 +662,16 @@
     {
       "key": "pools_summary",
       "label": {
-        "en": "Get the crowd of the pools",
-        "fr": "Obtenir l'affluence des piscines",
-        "de": "Andrang der Schwimmbäder abrufen",
-        "es": "Obtener la afluencia de las piscinas"
+        "en": "Get the crowd of the pools and ice rinks",
+        "fr": "Obtenir l'affluence des piscines et patinoires",
+        "de": "Andrang der Schwimmbäder und Eisbahnen abrufen",
+        "es": "Obtener la afluencia de las piscinas y pistas de hielo"
       },
       "description": {
-        "en": "Your watched pools in a sentence ready to send: open or closed, people inside, closing time.",
-        "fr": "Vos piscines suivies en une phrase prête à envoyer : ouverte ou fermée, personnes présentes, heure de fermeture.",
-        "de": "Deine überwachten Schwimmbäder in einem fertigen Satz: geöffnet oder geschlossen, Personen, Schließzeit.",
-        "es": "Sus piscinas vigiladas en una frase lista para enviar: abierta o cerrada, personas presentes, hora de cierre."
+        "en": "Your watched pools and ice rinks in a sentence ready to send: open or closed, people inside, closing time.",
+        "fr": "Vos piscines et patinoires suivies en une phrase prête à envoyer : ouverte ou fermée, personnes présentes, heure de fermeture.",
+        "de": "Deine überwachten Schwimmbäder und Eisbahnen in einem fertigen Satz: geöffnet oder geschlossen, Personen, Schließzeit.",
+        "es": "Sus piscinas y pistas de hielo vigiladas en una frase lista para enviar: abierta o cerrada, personas presentes, hora de cierre."
       },
       "timeout_seconds": 15,
       "fields": [
@@ -670,16 +681,16 @@
           "source": "devices",
           "required": false,
           "label": {
-            "en": "Pools",
-            "fr": "Piscines",
-            "de": "Schwimmbäder",
-            "es": "Piscinas"
+            "en": "Pools and ice rinks",
+            "fr": "Piscines et patinoires",
+            "de": "Schwimmbäder und Eisbahnen",
+            "es": "Piscinas y pistas de hielo"
           },
           "description": {
-            "en": "Empty: every watched pool.",
-            "fr": "Vide : toutes les piscines suivies.",
-            "de": "Leer: alle überwachten Schwimmbäder.",
-            "es": "Vacío: todas las piscinas vigiladas."
+            "en": "Empty: every watched pool and ice rink.",
+            "fr": "Vide : toutes les piscines et patinoires suivies.",
+            "de": "Leer: alle überwachten Schwimmbäder und Eisbahnen.",
+            "es": "Vacío: todas las piscinas y pistas de hielo vigiladas."
           }
         }
       ],
@@ -698,10 +709,10 @@
           "key": "open_count",
           "type": "number",
           "label": {
-            "en": "Pools open (Strasbourg)",
-            "fr": "Piscines ouvertes (Strasbourg)",
-            "de": "Geöffnete Schwimmbäder (Straßburg)",
-            "es": "Piscinas abiertas (Estrasburgo)"
+            "en": "Open pools and ice rinks (Strasbourg)",
+            "fr": "Piscines et patinoires ouvertes (Strasbourg)",
+            "de": "Geöffnete Schwimmbäder und Eisbahnen (Straßburg)",
+            "es": "Piscinas y pistas de hielo abiertas (Estrasburgo)"
           }
         },
         {
@@ -721,16 +732,16 @@
     {
       "key": "pools",
       "label": {
-        "en": "Swimming pools",
-        "fr": "Piscines",
-        "de": "Schwimmbäder",
-        "es": "Piscinas"
+        "en": "Pools and ice rinks",
+        "fr": "Piscines et patinoires",
+        "de": "Schwimmbäder und Eisbahnen",
+        "es": "Piscinas y pistas de hielo"
       },
       "description": {
-        "en": "Crowd and today's hours of your pools, colored by how busy they are.",
-        "fr": "Affluence et horaires du jour de vos piscines, en couleur selon la fréquentation.",
-        "de": "Andrang und heutige Öffnungszeiten deiner Schwimmbäder, farbig nach Auslastung.",
-        "es": "Afluencia y horario de hoy de sus piscinas, en color según la ocupación."
+        "en": "Crowd and today's hours of your pools and ice rinks, colored by how busy they are.",
+        "fr": "Affluence et horaires du jour de vos piscines et patinoires, en couleur selon la fréquentation.",
+        "de": "Andrang und heutige Öffnungszeiten deiner Schwimmbäder und Eisbahnen, farbig nach Auslastung.",
+        "es": "Afluencia y horario de hoy de sus piscinas y pistas de hielo, en color según la ocupación."
       },
       "icon": "droplet",
       "settings": [
@@ -740,16 +751,16 @@
           "source": "devices",
           "required": false,
           "label": {
-            "en": "Pools shown",
-            "fr": "Piscines affichées",
-            "de": "Angezeigte Schwimmbäder",
-            "es": "Piscinas mostradas"
+            "en": "Pools and ice rinks shown",
+            "fr": "Piscines et patinoires affichées",
+            "de": "Angezeigte Schwimmbäder und Eisbahnen",
+            "es": "Piscinas y pistas de hielo mostradas"
           },
           "description": {
-            "en": "Empty: every watched pool (10 at most).",
-            "fr": "Vide : toutes les piscines suivies (10 au plus).",
-            "de": "Leer: alle überwachten Schwimmbäder (höchstens 10).",
-            "es": "Vacío: todas las piscinas vigiladas (10 como máximo)."
+            "en": "Empty: every watched pool and ice rink (10 at most).",
+            "fr": "Vide : toutes les piscines et patinoires suivies (10 au plus).",
+            "de": "Leer: alle überwachten Schwimmbäder und Eisbahnen (höchstens 10).",
+            "es": "Vacío: todas las piscinas y pistas de hielo vigiladas (10 como máximo)."
           }
         },
         {

@@ -1,4 +1,4 @@
-# Piscines en temps réel
+# Piscines et patinoires en temps réel
 
 L'**affluence et l'ouverture des piscines municipales** de villes françaises, lues en direct sur
 leurs portails open data : les piscines de l'Eurométropole de Strasbourg et celles de la ville de
@@ -7,6 +7,8 @@ Bordeaux. **Sans compte ni clé.**
 Intégration non officielle, sans lien avec les villes, les métropoles ni les exploitants des
 piscines. Développée sans accès aux équipements : les sources ont été vérifiées en direct le
 29/10/2026 (de nuit, piscines fermées), vos retours sont les bienvenus.
+
+**Patinoire** : la patinoire l'Iceberg de Strasbourg publie sa fréquentation dans le même format que les piscines. Elle se coche à part, « Strasbourg (patinoire l'Iceberg) » dans **Villes**, et donne le même appareil (« Strasbourg · Patinoire l'Iceberg »), les mêmes déclencheurs, le même widget et la même action de scène que les piscines de Strasbourg : tout ce qui est dit ici des piscines vaut pour elle.
 
 ## Ce que vous obtenez
 
@@ -132,10 +134,11 @@ La phrase suit la langue choisie dans la configuration.
 
 ## Données et rafraîchissement
 
-| Ville      | Portail                                       | Jeu de données                                | Licence         |
-| ---------- | --------------------------------------------- | --------------------------------------------- | --------------- |
-| Strasbourg | data.strasbourg.eu (Opendatasoft)             | Fréquentation en temps réel des piscines      | Licence Ouverte |
-| Bordeaux   | opendata.bordeaux-metropole.fr (Opendatasoft) | Fréquentation temps réel des piscines (ville) | Licence Ouverte |
+| Ville      | Portail                                       | Jeu de données                                      | Licence         |
+| ---------- | --------------------------------------------- | --------------------------------------------------- | --------------- |
+| Strasbourg | data.strasbourg.eu (Opendatasoft)             | Fréquentation en temps réel des piscines            | Licence Ouverte |
+| Bordeaux   | opendata.bordeaux-metropole.fr (Opendatasoft) | Fréquentation temps réel des piscines (ville)       | Licence Ouverte |
+| Strasbourg | data.strasbourg.eu (Opendatasoft)             | Fréquentation en temps réel de la patinoire Iceberg | Licence Ouverte |
 
 Une requête par ville et par lecture, quelques kilo-octets. Les villes mettent à jour leurs
 données toutes les 5 à 10 minutes ; à 5 minutes, cela fait 288 requêtes par jour et par ville,
@@ -163,6 +166,7 @@ des piscines ajoutées sont lues.
   de la réalité, surtout en fin de journée.
 - Strasbourg ne donne pas de capacité, donc pas de taux d'occupation.
 - Lecture seule : aucune réservation ni paiement.
+- Patinoires : seule celle de Strasbourg (l'Iceberg) publie aujourd'hui sa fréquentation en direct ; Toulouse ne publie qu'une liste statique.
 
 ## Crédits
 

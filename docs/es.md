@@ -1,4 +1,4 @@
-# Piscines en temps réel
+# Piscines et patinoires en temps réel
 
 La **afluencia y la apertura de las piscinas municipales** de ciudades francesas, leídas en
 directo en sus portales de datos abiertos: las piscinas de la Eurométropole de Strasbourg y las de
@@ -7,6 +7,8 @@ la ciudad de Burdeos. **Sin cuenta ni clave.**
 Integración no oficial, sin relación con las ciudades, las métropoles ni los operadores de las
 piscinas. Desarrollada sin acceso a las instalaciones: las fuentes se comprobaron en directo el
 29/10/2026 (de noche, piscinas cerradas). Sus comentarios son bienvenidos.
+
+**Pista de hielo**: la pista de hielo Iceberg de Estrasburgo publica su afluencia en el mismo formato que las piscinas. Se marca aparte, «Estrasburgo (pista de hielo Iceberg)» en **Ciudades**, y obtiene el mismo dispositivo («Strasbourg · Patinoire l'Iceberg»), los mismos disparadores, el mismo widget y la misma acción de escena que las piscinas de Estrasburgo. Todo lo que esta guía dice de las piscinas vale para ella.
 
 ## Qué obtiene
 
@@ -133,10 +135,11 @@ La frase sigue el idioma elegido en la configuración.
 
 ## Datos y actualización
 
-| Ciudad      | Portal                                        | Conjunto de datos                             | Licencia        |
-| ----------- | --------------------------------------------- | --------------------------------------------- | --------------- |
-| Estrasburgo | data.strasbourg.eu (Opendatasoft)             | Fréquentation en temps réel des piscines      | Licence Ouverte |
-| Burdeos     | opendata.bordeaux-metropole.fr (Opendatasoft) | Fréquentation temps réel des piscines (ville) | Licence Ouverte |
+| Ciudad      | Portal                                        | Conjunto de datos                                   | Licencia        |
+| ----------- | --------------------------------------------- | --------------------------------------------------- | --------------- |
+| Estrasburgo | data.strasbourg.eu (Opendatasoft)             | Fréquentation en temps réel des piscines            | Licence Ouverte |
+| Burdeos     | opendata.bordeaux-metropole.fr (Opendatasoft) | Fréquentation temps réel des piscines (ville)       | Licence Ouverte |
+| Estrasburgo | data.strasbourg.eu (Opendatasoft)             | Fréquentation en temps réel de la patinoire Iceberg | Licence Ouverte |
 
 Una petición por ciudad y por lectura, unos pocos kilobytes. Las ciudades actualizan sus datos cada
 5 a 10 minutos; a 5 minutos, son 288 peticiones al día por ciudad, muy por debajo de las cuotas de
@@ -164,6 +167,7 @@ añadidas.
   realidad, sobre todo al final del día.
 - Estrasburgo no da capacidad, por lo tanto tampoco ocupación.
 - Solo lectura: ni reserva ni pago.
+- Pistas de hielo: solo la de Estrasburgo (Iceberg) publica hoy su afluencia en directo; Toulouse solo publica una lista estática.
 
 ## Créditos
 

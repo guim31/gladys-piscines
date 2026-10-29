@@ -77,9 +77,10 @@ export const TEXT = {
     sentenceNoCount: ({ name }) => `${name}: no count right now.`,
     sentence: ({ name, people, capacity, crowd, until }) =>
       `${name}: ${people} ${plural(people, 'person', 'people')}${capacity ? ` out of ${capacity}` : ''}${crowd ? ` (${crowd})` : ''}${until ? `, open until ${until}` : ''}.`,
-    pickPool: 'Add a pool in the Discover tab of the integration, then pick it here.',
-    gone: 'This pool is no longer watched.',
-    noPool: 'No pool is watched: add one in the Discover tab of the integration.',
+    pickPool:
+      'Add a pool or an ice rink in the Discover tab of the integration, then pick it here.',
+    gone: 'This facility is no longer watched.',
+    noPool: 'Nothing is watched: add a pool or an ice rink in the Discover tab of the integration.',
   },
   fr: {
     closed: 'fermée',
@@ -100,10 +101,10 @@ export const TEXT = {
     sentence: ({ name, people, capacity, crowd, until }) =>
       `${name} : ${people} ${pluralFr(people, 'personne', 'personnes')}${capacity ? ` sur ${capacity}` : ''}${crowd ? ` (${crowd})` : ''}${until ? `, ouverte jusqu'à ${until}` : ''}.`,
     pickPool:
-      "Ajoutez une piscine dans l'onglet Découverte de l'intégration, puis choisissez-la ici.",
-    gone: "Cette piscine n'est plus suivie.",
+      "Ajoutez une piscine ou une patinoire dans l'onglet Découverte de l'intégration, puis choisissez-la ici.",
+    gone: "Cet équipement n'est plus suivi.",
     noPool:
-      "Aucune piscine n'est suivie : ajoutez-en une dans l'onglet Découverte de l'intégration.",
+      "Rien n'est suivi : ajoutez une piscine ou une patinoire dans l'onglet Découverte de l'intégration.",
   },
   de: {
     closed: 'geschlossen',
@@ -123,9 +124,11 @@ export const TEXT = {
     sentenceNoCount: ({ name }) => `${name}: gerade keine Zählung.`,
     sentence: ({ name, people, capacity, crowd, until }) =>
       `${name}: ${people} ${plural(people, 'Person', 'Personen')}${capacity ? ` von ${capacity}` : ''}${crowd ? ` (${crowd})` : ''}${until ? `, geöffnet bis ${until}` : ''}.`,
-    pickPool: 'Füge ein Schwimmbad im Tab „Entdecken“ der Integration hinzu und wähle es hier.',
-    gone: 'Dieses Schwimmbad wird nicht mehr überwacht.',
-    noPool: 'Kein Schwimmbad wird überwacht: füge eines im Tab „Entdecken“ der Integration hinzu.',
+    pickPool:
+      'Füge ein Schwimmbad oder eine Eisbahn im Tab „Entdecken“ der Integration hinzu und wähle es hier.',
+    gone: 'Diese Einrichtung wird nicht mehr überwacht.',
+    noPool:
+      'Nichts wird überwacht: füge ein Schwimmbad oder eine Eisbahn im Tab „Entdecken“ der Integration hinzu.',
   },
   es: {
     closed: 'cerrada',
@@ -147,9 +150,11 @@ export const TEXT = {
     sentenceNoCount: ({ name }) => `${name}: sin recuento en este momento.`,
     sentence: ({ name, people, capacity, crowd, until }) =>
       `${name}: ${people} ${plural(people, 'persona', 'personas')}${capacity ? ` de ${capacity}` : ''}${crowd ? ` (${crowd})` : ''}${until ? `, abierta hasta las ${until}` : ''}.`,
-    pickPool: 'Añada una piscina en la pestaña Descubrir de la integración y luego elíjala aquí.',
-    gone: 'Esta piscina ya no está vigilada.',
-    noPool: 'No se vigila ninguna piscina: añada una en la pestaña Descubrir de la integración.',
+    pickPool:
+      'Añada una piscina o una pista de hielo en la pestaña Descubrir de la integración y luego elíjala aquí.',
+    gone: 'Esta instalación ya no está vigilada.',
+    noPool:
+      'No se vigila nada: añada una piscina o una pista de hielo en la pestaña Descubrir de la integración.',
   },
 };
 
@@ -157,38 +162,42 @@ export const TEXT = {
 export const REPORTS = {
   en: {
     noCity: 'No city chosen: tick one or more cities above, then save.',
-    city: ({ name, count }) => `■ ${name}: ${count} pool${count === 1 ? '' : 's'}`,
+    city: ({ name, count, kind }) =>
+      `■ ${name}: ${count} ${kind === 'rink' ? 'ice rink' : 'pool'}${count === 1 ? '' : 's'}`,
     read: ({ age }) => `Last reading ${age} s ago.`,
     waiting: 'Not read yet.',
     error: ({ error }) => `Last error: ${error}`,
-    watched: ({ count }) => `${count} pool${count === 1 ? '' : 's'} added to Gladys.`,
+    watched: ({ count }) => `${count} ${plural(count, 'facility', 'facilities')} added to Gladys.`,
   },
   fr: {
     noCity: 'Aucune ville choisie : cochez une ou plusieurs villes ci-dessus, puis enregistrez.',
-    city: ({ name, count }) => `■ ${name} : ${count} piscine${count > 1 ? 's' : ''}`,
+    city: ({ name, count, kind }) =>
+      `■ ${name} : ${count} ${kind === 'rink' ? 'patinoire' : 'piscine'}${count > 1 ? 's' : ''}`,
     read: ({ age }) => `Dernière lecture il y a ${age} s.`,
     waiting: 'Pas encore lu.',
     error: ({ error }) => `Dernière erreur : ${error}`,
     watched: ({ count }) =>
-      `${count} piscine${count > 1 ? 's' : ''} ajoutée${count > 1 ? 's' : ''} à Gladys.`,
+      `${count} ${pluralFr(count, 'équipement ajouté', 'équipements ajoutés')} à Gladys.`,
   },
   de: {
     noCity: 'Keine Stadt gewählt: kreuze oben eine oder mehrere Städte an und speichere.',
-    city: ({ name, count }) => `■ ${name}: ${count} ${count === 1 ? 'Schwimmbad' : 'Schwimmbäder'}`,
+    city: ({ name, count, kind }) =>
+      `■ ${name}: ${count} ${kind === 'rink' ? plural(count, 'Eisbahn', 'Eisbahnen') : plural(count, 'Schwimmbad', 'Schwimmbäder')}`,
     read: ({ age }) => `Letzte Abfrage vor ${age} s.`,
     waiting: 'Noch nicht abgefragt.',
     error: ({ error }) => `Letzter Fehler: ${error}`,
     watched: ({ count }) =>
-      `${count} ${count === 1 ? 'Schwimmbad' : 'Schwimmbäder'} zu Gladys hinzugefügt.`,
+      `${count} ${plural(count, 'Einrichtung', 'Einrichtungen')} zu Gladys hinzugefügt.`,
   },
   es: {
     noCity: 'Ninguna ciudad elegida: marque una o varias ciudades arriba y guarde.',
-    city: ({ name, count }) => `■ ${name}: ${count} piscina${count === 1 ? '' : 's'}`,
+    city: ({ name, count, kind }) =>
+      `■ ${name}: ${count} ${kind === 'rink' ? plural(count, 'pista de hielo', 'pistas de hielo') : plural(count, 'piscina', 'piscinas')}`,
     read: ({ age }) => `Última lectura hace ${age} s.`,
     waiting: 'Aún no leído.',
     error: ({ error }) => `Último error: ${error}`,
     watched: ({ count }) =>
-      `${count} piscina${count === 1 ? '' : 's'} añadida${count === 1 ? '' : 's'} a Gladys.`,
+      `${count} ${plural(count, 'instalación añadida', 'instalaciones añadidas')} a Gladys.`,
   },
 };
 

@@ -1,9 +1,10 @@
-# Gladys Live swimming pools
+# Gladys Live swimming pools and ice rinks
 
 External integration for [Gladys Assistant](https://gladysassistant.com): the
 **crowd and opening of public swimming pools** in French cities, read live
 from their open data portals: the pools of the **Eurométropole de
-Strasbourg** and of the city of **Bordeaux**. **No account, no key.**
+Strasbourg** and of the city of **Bordeaux**, and Strasbourg's **Iceberg ice
+rink**. **No account, no key.**
 
 Unofficial: not affiliated with the cities, metropolises or pool operators.
 Developed without the hardware: the two sources were checked live on
@@ -23,6 +24,8 @@ User documentation: [English](docs/en.md) · [français](docs/fr.md) ·
 - Scene triggers: the pool opens, the pool closes, the crowd rises above or
   drops below a threshold.
 - A scene action: the state of your pools in a sentence ready to send.
+- The ice rink is ticked on its own in the configuration and gets the same
+  device, triggers, widget and scene action as the Strasbourg pools.
 
 ## Requirements
 
@@ -36,10 +39,11 @@ Configuration tab, save, and add your pools from the Discover tab.
 
 ## How it works
 
-| City       | Portal                                        | Data                                                   |
-| ---------- | --------------------------------------------- | ------------------------------------------------------ |
-| Strasbourg | data.strasbourg.eu (Opendatasoft)             | open/closed, people inside, crowd level, today's hours |
-| Bordeaux   | opendata.bordeaux-metropole.fr (Opendatasoft) | people inside and capacity per zone (stands left out)  |
+| City                          | Portal                                        | Data                                                   |
+| ----------------------------- | --------------------------------------------- | ------------------------------------------------------ |
+| Strasbourg                    | data.strasbourg.eu (Opendatasoft)             | open/closed, people inside, crowd level, today's hours |
+| Bordeaux                      | opendata.bordeaux-metropole.fr (Opendatasoft) | people inside and capacity per zone (stands left out)  |
+| Strasbourg (Iceberg ice rink) | data.strasbourg.eu (Opendatasoft)             | same fields as the Strasbourg pools                    |
 
 One HTTPS request per city every 3, 5 or 10 minutes, on the integration's own
 timer (the devices are not polled by Gladys). No value is invented: when a

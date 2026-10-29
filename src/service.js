@@ -50,6 +50,8 @@ class City {
   constructor(key) {
     this.key = key;
     this.source = SOURCES[key];
+    // For the logs: Strasbourg has a source for its pools and one for its rink.
+    this.label = `${this.source.name}${this.source.kind === 'rink' ? ' (ice rink)' : ''}`;
     this.readings = null; // Map id → reading
     this.okAt = null;
     this.previousOkAt = null;
@@ -344,14 +346,14 @@ export class Pools {
       city.previousOkAt = city.okAt;
       city.okAt = this.now();
       if (city.error) {
-        logger.info(`${city.source.name}: data back`);
+        logger.info(`${city.label}: data back`);
       }
       city.error = null;
-      logger.debug(`${city.source.name}: ${readings.length} pools read`);
+      logger.debug(`${city.label}: ${readings.length} pools read`);
       return true;
     } catch (err) {
       if (!city.error) {
-        logger.warn(`${city.source.name}: data unavailable: ${err.message}`);
+        logger.warn(`${city.label}: data unavailable: ${err.message}`);
       }
       city.error = err.message;
       return false;
@@ -511,7 +513,11 @@ export class Pools {
     for (const key of this.activeKeys()) {
       const city = this.city(key);
       blocks.push(
-        render(REPORTS, 'city', { name: city.source.name, count: city.readings?.size ?? 0 }),
+        render(REPORTS, 'city', {
+          name: city.source.name,
+          count: city.readings?.size ?? 0,
+          kind: city.source.kind,
+        }),
         city.okAt === null
           ? render(REPORTS, 'waiting')
           : render(REPORTS, 'read', { age: Math.round((now - city.okAt) / 1000) }),

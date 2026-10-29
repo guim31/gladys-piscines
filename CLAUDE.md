@@ -45,7 +45,7 @@ gladys-assistant-integration.json manifest: config, action, widget, scene trigge
 docs/{en,fr,de,es}.md             user documentation, re-hosted by Gladys (en and fr mandatory)
 test/                             node --test, against the SDK's fake Gladys (integration-sdk/testing)
 test/helpers/world.js             fake Gladys + fake fetch on the fixtures + manual clock
-test/fixtures/sources             real answers of the two portals (2026-10-29), index.json = URL -> file
+test/fixtures/sources             real answers of the portals (2026-10-29), index.json = URL -> file
 .github/scripts/release.mjs       release helpers (manifest bump, changelog), tested in test/
 ```
 
@@ -261,10 +261,16 @@ long, et sur un « Sie »/« Ihr… » de politesse en allemand. Le store exige 
 
 ## Sources vérifiées en direct (29/10/2026)
 
-| Clé (figée)  | Portail                                                             | Particularités                                                                                                           |
-| ------------ | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `strasbourg` | data.strasbourg.eu `frequentation-en-temps-reel-des-piscines` (ODS) | `isopen`, `occupation` vide si fermée, `realtimestatus`, `dayschedule` JSON, `updatedate` heure de Paris **sans fuseau** |
-| `bordeaux`   | opendata.bordeaux-metropole.fr `bor_frequentation_piscine_tr` (ODS) | une ligne par **zone** ; pas d'identifiant d'établissement (nom), ni état ni horaires                                    |
+| Clé (figée)       | Portail                                                                  | Particularités                                                                                                           |
+| ----------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `strasbourg`      | data.strasbourg.eu `frequentation-en-temps-reel-des-piscines` (ODS)      | `isopen`, `occupation` vide si fermée, `realtimestatus`, `dayschedule` JSON, `updatedate` heure de Paris **sans fuseau** |
+| `bordeaux`        | opendata.bordeaux-metropole.fr `bor_frequentation_piscine_tr` (ODS)      | une ligne par **zone** ; pas d'identifiant d'établissement (nom), ni état ni horaires                                    |
+| `strasbourg_rink` | data.strasbourg.eu `frequentation-en-temps-reel-patinoire-iceberg` (ODS) | patinoire l'Iceberg, **même format** que les piscines de Strasbourg (`sigid` 849_SPO_16)                                 |
+
+Patinoires (1.1, 29/10) : une source à part par ville (`kind: 'rink'`), cochée à part, mêmes
+appareil, déclencheurs et widget ; `POOL_TYPE` reste `pool` dans les `external_id` (figé). Recherche
+du 29/10 : seule l'Iceberg publie en direct (Toulouse `patinoires` statique, Bordeaux rien ; aucune
+salle d'escalade municipale en temps réel).
 
 Écartées (données statiques seulement, 29/10) : Nantes (`244400404_piscines-nantes-metropole`),
 Toulouse (`piscines`), Paris, Rennes, Lille, Lyon ; Montpellier (`portail-api-data`) en 503. Les

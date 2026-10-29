@@ -19,6 +19,8 @@ import {
   cycle,
   featureId,
   openStrasbourg,
+  parisStamp,
+  setRecords,
   urlOf,
 } from './helpers/world.js';
 
@@ -217,7 +219,7 @@ test('the status action: cities, readings, errors, pools added', async (t) => {
   assert.match(message.fr, /■ Strasbourg : 8 piscines/);
   assert.match(message.fr, /■ Bordeaux : 5 piscines/);
   assert.match(message.fr, /Dernière erreur : opendata\.bordeaux-metropole\.fr: HTTP 503/);
-  assert.match(message.fr, /1 piscine ajoutée à Gladys\./);
+  assert.match(message.fr, /1 équipement ajouté à Gladys\./);
   assert.match(message.de, /Schwimmbäder/);
 });
 
@@ -257,4 +259,61 @@ test('the integration reads on its own timer, without any poll from Gladys', asy
   t.mock.timers.tick(180 * 1000);
   await app.service.refreshing;
   assert.equal(reads(), 3);
+});
+
+test('the Iceberg ice rink: its own choice, the same features, triggers and status', async (t) => {
+  const world = await createWorld({ config: { cities: ['strasbourg_rink'] } });
+  t.after(() => world.app.stop());
+  assert.deepEqual(
+    world.fake.discoveredDevices.map((d) => d.name),
+    ["Strasbourg · Patinoire l'Iceberg"],
+  );
+  const device = await create(world, 'Iceberg');
+  assert.match(device.external_id, /:pool:strasbourg_rink-849_SPO_16$/);
+  assert.deepEqual(
+    device.features.map((f) => f.external_id.split(':').pop()),
+    ['open', 'people', 'crowd', 'hours', 'age'],
+  );
+  const last = (key) => world.fake.lastState(featureId(device, key));
+  assert.equal(last('open'), 0);
+  assert.equal(last('people'), undefined, 'no count while closed');
+  assert.equal(last('crowd'), 'fermée');
+  assert.equal(last('hours'), '14:00–18:30');
+
+  // 15:00 in Paris: open, then busier.
+  world.clock.time = AFTERNOON;
+  const openRink = (people) =>
+    setRecords(world, 'strasbourg_rink.json', () => true, {
+      isopen: 1,
+      occupation: people,
+      realtimestatus: 'GREEN',
+      updatedate: parisStamp(world.clock.now()),
+    });
+  openRink(10);
+  await cycle(world, 300);
+  openRink(70);
+  await cycle(world, 300);
+  assert.equal(last('people'), 70);
+  const events = world.fake.sceneEvents.map((e) => [e.key, e.data.threshold ?? null]);
+  assert.deepEqual(events, [
+    ['crowd_above', '20'],
+    ['crowd_above', '50'],
+  ]);
+  assert.equal(world.fake.sceneEvents[0].data.pool_name, "Patinoire l'Iceberg");
+
+  const message = await action(world, 'status');
+  assert.match(message.fr, /■ Strasbourg : 1 patinoire\n/);
+  assert.match(message.en, /■ Strasbourg: 1 ice rink\n/);
+  assert.match(message.de, /1 Eisbahn/);
+  assert.match(message.es, /1 pista de hielo/);
+
+  const ack = await world.fake.widgetGet('pools', { language: 'fr' });
+  assert.deepEqual(validateWidgetContent(ack.data.content), []);
+  assert.deepEqual(ack.data.content.components[0].items, [
+    {
+      label: "Strasbourg · Patinoire l'Iceberg",
+      value: "70 pers. · fluide · jusqu'à 18:30",
+      color: 'success',
+    },
+  ]);
 });

@@ -1,4 +1,4 @@
-# Piscines en temps réel
+# Piscines et patinoires en temps réel
 
 **Andrang und Öffnung städtischer Schwimmbäder** französischer Städte, live von ihren
 Open-Data-Portalen gelesen: die Schwimmbäder der Eurométropole de Strasbourg und die der Stadt
@@ -7,6 +7,8 @@ Bordeaux. **Kein Konto, kein Schlüssel.**
 Inoffizielle Integration, ohne Verbindung zu den Städten, Métropoles oder Betreibern der Bäder.
 Entwickelt ohne Zugang zu den Anlagen: Die Quellen wurden am 29.10.2026 live geprüft (nachts, Bäder
 geschlossen). Rückmeldungen sind willkommen.
+
+**Eisbahn**: Die Eisbahn Iceberg in Straßburg veröffentlicht ihren Andrang im selben Format wie die Schwimmbäder. Du kreuzt sie separat an, „Straßburg (Eisbahn Iceberg)“ unter **Städte**: Die Eisbahn bekommt dasselbe Gerät („Strasbourg · Patinoire l'Iceberg“), dieselben Auslöser, dasselbe Widget und dieselbe Szenen-Aktion wie die Straßburger Schwimmbäder. Alles, was diese Anleitung über Schwimmbäder sagt, gilt auch für sie.
 
 ## Was du bekommst
 
@@ -130,10 +132,11 @@ Der Satz folgt der in der Konfiguration gewählten Sprache.
 
 ## Daten und Aktualisierung
 
-| Stadt     | Portal                                        | Datensatz                                     | Lizenz          |
-| --------- | --------------------------------------------- | --------------------------------------------- | --------------- |
-| Straßburg | data.strasbourg.eu (Opendatasoft)             | Fréquentation en temps réel des piscines      | Licence Ouverte |
-| Bordeaux  | opendata.bordeaux-metropole.fr (Opendatasoft) | Fréquentation temps réel des piscines (ville) | Licence Ouverte |
+| Stadt     | Portal                                        | Datensatz                                           | Lizenz          |
+| --------- | --------------------------------------------- | --------------------------------------------------- | --------------- |
+| Straßburg | data.strasbourg.eu (Opendatasoft)             | Fréquentation en temps réel des piscines            | Licence Ouverte |
+| Bordeaux  | opendata.bordeaux-metropole.fr (Opendatasoft) | Fréquentation temps réel des piscines (ville)       | Licence Ouverte |
+| Straßburg | data.strasbourg.eu (Opendatasoft)             | Fréquentation en temps réel de la patinoire Iceberg | Licence Ouverte |
 
 Eine Anfrage pro Stadt und Abfrage, einige Kilobyte. Die Städte aktualisieren ihre Daten alle 5
 bis 10 Minuten; bei 5 Minuten sind das 288 Anfragen pro Tag und Stadt, weit unter den Kontingenten
@@ -161,6 +164,7 @@ gelesen.
   können von der Wirklichkeit abweichen, vor allem gegen Ende des Tages.
 - Straßburg gibt keine Kapazität an, daher keine Auslastung.
 - Nur lesend: keine Reservierung, keine Bezahlung.
+- Eisbahnen: Nur die Straßburger (Iceberg) veröffentlicht heute ihren Andrang live; Toulouse veröffentlicht nur eine statische Liste.
 
 ## Danksagung
 

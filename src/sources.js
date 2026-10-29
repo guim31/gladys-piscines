@@ -1,6 +1,7 @@
 // -----------------------------------------------------------------------------
 // The open data sources: one adapter per city portal, each turning its own
-// fields into the same reading of a swimming pool:
+// fields into the same reading of a facility (a swimming pool or an ice
+// rink, the `kind` of the source):
 //
 //   { id, name, open, people, capacity, level, schedule, updatedAt }
 //
@@ -16,8 +17,10 @@
 //   updatedAt  date of the count in ms, or null (the age is then the age of
 //              the last successful read)
 //
-// Both sources were checked live on 2026-10-29 (test/fixtures/sources holds
+// Every source was checked live on 2026-10-29 (test/fixtures/sources holds
 // those answers). Keys are part of the device external ids: never rename one.
+// A city's ice rinks are a source of their own, next to its pools: a user
+// ticks what they want offered in the Discover tab.
 // -----------------------------------------------------------------------------
 
 import { getJson } from './http.js';
@@ -211,24 +214,25 @@ export function bordeauxReadings(records) {
   );
 }
 
+/** Strasbourg publishes its pools and its ice rink in the same format, as two datasets. */
+async function strasbourgRead(fetch, dataset) {
+  const records = await odsRecords(fetch, 'https://data.strasbourg.eu', dataset);
+  return records.filter((record) => record.sigid).map(strasbourgReading);
+}
+
 export const SOURCES = {
   strasbourg: {
     name: 'Strasbourg',
+    kind: 'pool',
     hasOpen: true,
     hasLevel: true,
     hasSchedule: true,
     hasCapacity: false,
-    async read(fetch) {
-      const records = await odsRecords(
-        fetch,
-        'https://data.strasbourg.eu',
-        'frequentation-en-temps-reel-des-piscines',
-      );
-      return records.filter((record) => record.sigid).map(strasbourgReading);
-    },
+    read: (fetch) => strasbourgRead(fetch, 'frequentation-en-temps-reel-des-piscines'),
   },
   bordeaux: {
     name: 'Bordeaux',
+    kind: 'pool',
     hasOpen: false,
     hasLevel: false,
     hasSchedule: false,
@@ -241,6 +245,16 @@ export const SOURCES = {
       );
       return bordeauxReadings(records);
     },
+  },
+  // The Iceberg ice rink (checked live on 2026-10-29), same fields as the pools.
+  strasbourg_rink: {
+    name: 'Strasbourg',
+    kind: 'rink',
+    hasOpen: true,
+    hasLevel: true,
+    hasSchedule: true,
+    hasCapacity: false,
+    read: (fetch) => strasbourgRead(fetch, 'frequentation-en-temps-reel-patinoire-iceberg'),
   },
 };
 

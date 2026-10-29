@@ -122,3 +122,22 @@ test('schedules: invalid slots dropped, sorted, null when empty', () => {
   assert.equal(int('12.6'), 13);
   assert.equal(int(''), null);
 });
+
+test('Strasbourg ice rink: the Iceberg, same format as the pools, closed at night', async () => {
+  const { readings, network } = await read('strasbourg_rink');
+  assert.equal(network.calls.length, 1);
+  assert.match(network.calls[0].url, /frequentation-en-temps-reel-patinoire-iceberg/);
+  assert.deepEqual(readings, [
+    {
+      id: '849_SPO_16',
+      name: "Patinoire l'Iceberg",
+      open: 0,
+      people: null,
+      capacity: null,
+      level: null,
+      schedule: [{ from: 14 * 60, to: 18 * 60 + 30 }],
+      updatedAt: Date.UTC(2026, 9, 29, 20, 18, 22),
+    },
+  ]);
+  assert.equal(SOURCES.strasbourg_rink.kind, 'rink');
+});

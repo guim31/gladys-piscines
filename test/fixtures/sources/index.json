@@ -1,4 +1,5 @@
 {
   "https://data.strasbourg.eu/api/explore/v2.1/catalog/datasets/frequentation-en-temps-reel-des-piscines/records?limit=100&offset=0": "strasbourg.json",
-  "https://opendata.bordeaux-metropole.fr/api/explore/v2.1/catalog/datasets/bor_frequentation_piscine_tr/records?limit=100&offset=0": "bordeaux.json"
+  "https://opendata.bordeaux-metropole.fr/api/explore/v2.1/catalog/datasets/bor_frequentation_piscine_tr/records?limit=100&offset=0": "bordeaux.json",
+  "https://data.strasbourg.eu/api/explore/v2.1/catalog/datasets/frequentation-en-temps-reel-patinoire-iceberg/records?limit=100&offset=0": "strasbourg_rink.json"
 }

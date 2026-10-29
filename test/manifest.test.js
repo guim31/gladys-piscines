@@ -43,7 +43,7 @@ const optionValues = (field) => field.options.map((option) => option.value);
 const field = (list, key) => list.find((entry) => entry.key === key);
 
 test('identity: name, image, cover, cloud transport, services category', () => {
-  assert.equal(manifest.name, 'Piscines en temps réel');
+  assert.equal(manifest.name, 'Piscines et patinoires');
   assert.equal(manifest.type, 'device');
   assert.match(manifest.docker_image, /^ghcr\.io\/guim31\/gladys-piscines:/);
   assert.equal(
@@ -64,7 +64,7 @@ test('Gladys 5.3.0 at least: widgets, scene triggers and actions, countries, key
 
 test('the cities offered are the sources of the code', () => {
   assert.deepEqual(optionValues(field(manifest.config_schema, 'cities')), SOURCE_KEYS);
-  assert.equal(Object.keys(SOURCES).length, 2);
+  assert.equal(Object.keys(SOURCES).length, 3);
 });
 
 test('every manifest action has a handler, and vice versa', () => {

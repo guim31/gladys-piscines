@@ -1,4 +1,4 @@
-# Piscines en temps réel
+# Piscines et patinoires en temps réel
 
 The **crowd and opening of the public swimming pools** of French cities, read live from their
 open data portals: the pools of the Eurométropole de Strasbourg and those of the city of Bordeaux.
@@ -7,6 +7,8 @@ open data portals: the pools of the Eurométropole de Strasbourg and those of th
 Unofficial integration, not affiliated with the cities, the métropoles nor the pool operators.
 Developed without access to the facilities: the sources were checked live on 2026-10-29 (at night,
 pools closed). Feedback welcome.
+
+**Ice rink**: Strasbourg's Iceberg ice rink publishes its crowd in the same format as the pools. Tick it on its own, "Strasbourg (Iceberg ice rink)" in **Cities**: it gets the same device ("Strasbourg · Patinoire l'Iceberg"), the same triggers, widget and scene action as the Strasbourg pools. Everything this guide says about pools applies to it.
 
 ## What you get
 
@@ -126,10 +128,11 @@ The sentence follows the language chosen in the configuration.
 
 ## Data and refresh
 
-| City       | Portal                                        | Dataset                                       | License         |
-| ---------- | --------------------------------------------- | --------------------------------------------- | --------------- |
-| Strasbourg | data.strasbourg.eu (Opendatasoft)             | Fréquentation en temps réel des piscines      | Licence Ouverte |
-| Bordeaux   | opendata.bordeaux-metropole.fr (Opendatasoft) | Fréquentation temps réel des piscines (ville) | Licence Ouverte |
+| City       | Portal                                        | Dataset                                             | License         |
+| ---------- | --------------------------------------------- | --------------------------------------------------- | --------------- |
+| Strasbourg | data.strasbourg.eu (Opendatasoft)             | Fréquentation en temps réel des piscines            | Licence Ouverte |
+| Bordeaux   | opendata.bordeaux-metropole.fr (Opendatasoft) | Fréquentation temps réel des piscines (ville)       | Licence Ouverte |
+| Strasbourg | data.strasbourg.eu (Opendatasoft)             | Fréquentation en temps réel de la patinoire Iceberg | Licence Ouverte |
 
 One request per city and per reading, a few kilobytes. The cities update their data every 5 to 10
 minutes; at 5 minutes, that is 288 requests a day per city, far below the quotas of the portals
@@ -155,6 +158,7 @@ for anonymous use. Only the cities ticked and those of the pools added are read.
   especially late in the day.
 - Strasbourg gives no capacity, hence no occupancy.
 - Read-only: no booking nor payment.
+- Ice rinks: only Strasbourg's (the Iceberg) publishes a live crowd today; Toulouse only publishes a static list.
 
 ## Credits
 

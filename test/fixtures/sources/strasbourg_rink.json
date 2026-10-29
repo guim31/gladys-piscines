@@ -1,0 +1,15 @@
+{
+  "total_count": 1,
+  "results": [
+    {
+      "name": "Patinoire l'Iceberg",
+      "sigid": "849_SPO_16",
+      "realtimestatus": "CLOSED",
+      "isopen": 0,
+      "occupation": null,
+      "dayschedule": "[{\"closingMinute\": 30, \"openingHour\": 14, \"closingHour\": 18, \"openingMinute\": 0}]",
+      "updatedate": "2026-10-29 21:18:22",
+      "types": "Cat_06_04"
+    }
+  ]
+}

@@ -55,6 +55,12 @@ export const NAMES = {
 const plural = (count, one, many) => (count === 1 ? one : many);
 const pluralFr = (count, one, many) => (count > 1 ? many : one);
 
+// The value of a widget row is short enough for a narrow column (3 or 4 per
+// row, or a phone): "179 · fluide · → 18:30"; "380 / 400 pers." when the count is alone. The count and the
+// arrow before the closing time read the same in every language.
+const compactCount = ({ people, capacity }) => (capacity ? `${people}/${capacity}` : `${people}`);
+const compactUntil = ({ time }) => `→ ${time}`;
+
 // Crowd texts, widget contents and scene outputs.
 export const TEXT = {
   en: {
@@ -67,12 +73,15 @@ export const TEXT = {
     level_high: 'busy',
     level_full: 'full',
     stale: 'data out of date',
-    people: ({ people, capacity }) =>
+    people: compactCount,
+    // Alone on its row (no level, hours hidden), the count says what it counts.
+    peopleAlone: ({ people, capacity }) =>
       capacity
         ? `${people} / ${capacity} people`
         : `${people} ${plural(people, 'person', 'people')}`,
-    until: ({ time }) => `until ${time}`,
-    opensAt: ({ time }) => `opens at ${time}`,
+    until: compactUntil,
+    opensAt: ({ time }) => `opens ${time}`,
+    noCountShort: 'no count',
     sentenceClosed: ({ name }) => `${name}: closed.`,
     sentenceNoCount: ({ name }) => `${name}: no count right now.`,
     sentence: ({ name, people, capacity, crowd, until }) =>
@@ -92,10 +101,12 @@ export const TEXT = {
     level_high: 'très chargée',
     level_full: 'saturée',
     stale: 'donnée périmée',
-    people: ({ people, capacity }) =>
+    people: compactCount,
+    peopleAlone: ({ people, capacity }) =>
       capacity ? `${people} / ${capacity} pers.` : `${people} pers.`,
-    until: ({ time }) => `jusqu'à ${time}`,
-    opensAt: ({ time }) => `ouvre à ${time}`,
+    until: compactUntil,
+    opensAt: ({ time }) => `ouvre ${time}`,
+    noCountShort: 'sans comptage',
     sentenceClosed: ({ name }) => `${name} : fermée.`,
     sentenceNoCount: ({ name }) => `${name} : pas de comptage en ce moment.`,
     sentence: ({ name, people, capacity, crowd, until }) =>
@@ -116,10 +127,12 @@ export const TEXT = {
     level_high: 'voll',
     level_full: 'überfüllt',
     stale: 'Daten veraltet',
-    people: ({ people, capacity }) =>
+    people: compactCount,
+    peopleAlone: ({ people, capacity }) =>
       capacity ? `${people} / ${capacity} Pers.` : `${people} ${plural(people, 'Person', 'Pers.')}`,
-    until: ({ time }) => `bis ${time}`,
-    opensAt: ({ time }) => `öffnet um ${time}`,
+    until: compactUntil,
+    opensAt: ({ time }) => `öffnet ${time}`,
+    noCountShort: 'ohne Zählung',
     sentenceClosed: ({ name }) => `${name}: geschlossen.`,
     sentenceNoCount: ({ name }) => `${name}: gerade keine Zählung.`,
     sentence: ({ name, people, capacity, crowd, until }) =>
@@ -140,12 +153,14 @@ export const TEXT = {
     level_high: 'muy concurrida',
     level_full: 'completa',
     stale: 'dato caducado',
-    people: ({ people, capacity }) =>
+    people: compactCount,
+    peopleAlone: ({ people, capacity }) =>
       capacity
         ? `${people} / ${capacity} pers.`
         : `${people} ${plural(people, 'persona', 'pers.')}`,
-    until: ({ time }) => `hasta ${time}`,
-    opensAt: ({ time }) => `abre a las ${time}`,
+    until: compactUntil,
+    opensAt: ({ time }) => `abre ${time}`,
+    noCountShort: 'sin recuento',
     sentenceClosed: ({ name }) => `${name}: cerrada.`,
     sentenceNoCount: ({ name }) => `${name}: sin recuento en este momento.`,
     sentence: ({ name, people, capacity, crowd, until }) =>

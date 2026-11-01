@@ -159,7 +159,16 @@ test('every message table of the code has the four languages', () => {
 });
 
 test('the crowd texts fit a widget status row (40 characters)', () => {
-  const keys = ['people', 'closed', 'noCount', 'stale', 'until', 'opensAt', 'noHours'];
+  const keys = [
+    'people',
+    'closed',
+    'noCount',
+    'noCountShort',
+    'stale',
+    'until',
+    'opensAt',
+    'noHours',
+  ];
   for (const lang of LANGS) {
     for (const key of [...keys, ...Object.keys(TEXT.en).filter((k) => k.startsWith('level_'))]) {
       for (const params of [

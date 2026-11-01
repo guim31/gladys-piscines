@@ -455,8 +455,8 @@ export class Pools {
   }
 
   /**
-   * "85 pers. · fluide · jusqu'à 20:00", "fermée · ouvre à 14:00"… for a
-   * widget row (40 characters).
+   * "85 · fluide · → 20:00", "fermée · ouvre 14:00"… for a widget row, short
+   * enough for a narrow column.
    */
   shortText(city, reading, language, { hours = true } = {}) {
     if (!reading) {
@@ -474,15 +474,15 @@ export class Pools {
         .filter(Boolean)
         .join(' · ');
     }
-    return [
-      reading.people === null
-        ? say(TEXT, language, 'noCount')
-        : say(TEXT, language, 'people', reading),
+    const rest = [
       reading.level ? say(TEXT, language, `level_${reading.level}`) : null,
       hours && current ? say(TEXT, language, 'until', { time: clock(current.to) }) : null,
-    ]
-      .filter(Boolean)
-      .join(' · ');
+    ].filter(Boolean);
+    let count = say(TEXT, language, 'noCountShort');
+    if (reading.people !== null) {
+      count = say(TEXT, language, rest.length > 0 ? 'people' : 'peopleAlone', reading);
+    }
+    return [count, ...rest].join(' · ');
   }
 
   /** "Piscine du Wacken : 85 personnes (fluide), ouverte jusqu'à 20:00." */

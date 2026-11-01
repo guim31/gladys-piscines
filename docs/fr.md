@@ -88,9 +88,19 @@ Au-delà de **45 minutes** sans mise à jour par la ville, la donnée est consid
 ## Widget du tableau de bord
 
 Ajoutez le widget **Piscines** à un tableau de bord. Il affiche une ligne par piscine suivie (dix
-au plus), sous le nom que vous lui avez donné dans Gladys, par exemple « 85 pers. · fluide ·
-jusqu'à 20:00 », ou « fermée · ouvre à 07:00 ». Dans ses réglages : les piscines affichées (vide :
-toutes) et l'affichage des horaires.
+au plus), sous le nom que vous lui avez donné dans Gladys. Chaque ligne se lit : personnes
+présentes, niveau d'affluence, heure de fermeture après la flèche, par exemple « 85 · fluide ·
+→ 20:00 », ou « fermée · ouvre 07:00 » ; à Bordeaux, les personnes présentes sur la capacité
+(« 380 / 400 pers. »). Dans ses réglages : les piscines affichées (vide : toutes) et **Afficher les
+horaires**.
+
+Les lignes restent courtes pour un widget étroit (trois ou quatre colonnes, ou un téléphone). Quand
+toutes les lignes sont de la même ville, la ville n'est pas répétée : « Piscine du Wacken » plutôt
+que « Strasbourg · Piscine du Wacken ». Quand il y a plusieurs lignes, toutes des piscines (ou
+toutes des patinoires), le mot « Piscine » part aussi : « Wacken », « Hautepierre ». Deux lignes ne
+se lisent jamais pareil : celle qui le ferait garde son nom plus long. Un nom changé dans Gladys
+s'affiche tel que vous l'avez écrit. Encore trop long ? Décochez **Afficher les horaires**, ou
+donnez à la piscine un nom court dans Gladys.
 
 Couleurs : le niveau de l'exploitant à Strasbourg (**vert** fluide, **orange** chargée, **rouge**
 très chargée ou saturée) ; le taux d'occupation à Bordeaux (**orange** dès 70 %, **rouge** dès

@@ -87,9 +87,18 @@ Nach **45 Minuten** ohne Aktualisierung durch die Stadt gelten die Daten als **v
 ## Dashboard-Widget
 
 Füge das Widget **Schwimmbäder** zu einem Dashboard hinzu. Es zeigt eine Zeile pro überwachtem Bad
-(höchstens zehn), unter dem Namen, den du ihm in Gladys gegeben hast, zum Beispiel „85 Pers. ·
-ruhig · bis 20:00“ oder „geschlossen · öffnet um 07:00“. In den Einstellungen: die angezeigten
-Bäder (leer: alle) und ob die Öffnungszeiten angezeigt werden.
+(höchstens zehn), unter dem Namen, den du ihm in Gladys gegeben hast. Jede Zeile liest sich so:
+anwesende Personen, Andrang, Schließzeit nach dem Pfeil, zum Beispiel „85 · ruhig · → 20:00“ oder
+„geschlossen · öffnet 07:00“; in Bordeaux anwesende Personen von der Kapazität („380 / 400 Pers.“). In den
+Einstellungen: die angezeigten Bäder (leer: alle) und **Öffnungszeiten anzeigen**.
+
+Die Zeilen bleiben kurz für ein schmales Widget (drei oder vier Spalten oder ein Handy). Sind alle
+Zeilen aus derselben Stadt, wird die Stadt nicht wiederholt: „Piscine du Wacken“ statt
+„Strasbourg · Piscine du Wacken“. Bei mehreren Zeilen, alle Schwimmbäder (oder alle Eisbahnen),
+fällt auch das Wort „Piscine“ weg: „Wacken“, „Hautepierre“. Zwei Zeilen lesen sich nie gleich: Eine
+Zeile, die es täte, behält ihren längeren Namen. Einen Namen, den du in Gladys geändert hast, zeigt
+das Widget so, wie du ihn geschrieben hast. Immer noch zu lang? Deaktiviere **Öffnungszeiten
+anzeigen** oder gib dem Bad in Gladys einen kurzen Namen.
 
 Farben: die Stufe des Betreibers in Straßburg (**grün** ruhig, **orange** mäßig voll, **rot** voll
 oder überfüllt); die Auslastung in Bordeaux (**orange** ab 70 %, **rot** ab 90 %); **grau**, wenn

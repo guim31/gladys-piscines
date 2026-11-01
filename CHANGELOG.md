@@ -10,6 +10,15 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+### Changed
+
+- Widget readable in a narrow column (three or four per row, or a phone): the
+  city is no longer repeated when every row is of the same city ("Piscine du
+  Wacken"), and several pools (or ice rinks) drop their kind word ("Wacken",
+  "Hautepierre"), never making two rows read the same; a name changed in Gladys
+  is kept as is. Compact values: "179 · fluide · → 18:30", "fermée · ouvre
+  14:00", "380/400" in Bordeaux.
+
 ## [1.1.0] - 2026-10-29
 
 ### Added

@@ -159,15 +159,16 @@ test('the widget: name given in Gladys, crowd, hours, colors; hours can be hidde
   assert.deepEqual(validateWidgetContent(content), []);
   // Gladys lists the device updated last.
   assert.deepEqual(content.components[0].items, [
-    { label: 'Bordeaux · Piscine Galin', value: '380 / 400 pers.', color: 'danger' },
-    { label: 'Ma piscine', value: "85 pers. · chargée · jusqu'à 20:00", color: 'warning' },
+    // Two cities: the prefix stays; a name changed in Gladys is never shortened.
+    { label: 'Bordeaux · Piscine Galin', value: '380/400', color: 'danger' },
+    { label: 'Ma piscine', value: '85 · chargée · → 20:00', color: 'warning' },
   ]);
   const hidden = await world.fake.widgetGet('pools', {
     language: 'en',
     settings: { show_hours: false, pools: [wacken.external_id] },
   });
   assert.deepEqual(hidden.data.content.components[0].items, [
-    { label: 'Ma piscine', value: '85 people · moderate', color: 'warning' },
+    { label: 'Ma piscine', value: '85 · moderate', color: 'warning' },
   ]);
 });
 
@@ -177,12 +178,57 @@ test('the widget at night: closed pools in grey with their next opening', async 
   await create(world, 'Wacken');
   const ack = await world.fake.widgetGet('pools', { language: 'fr' });
   assert.deepEqual(ack.data.content.components[0].items, [
-    { label: 'Strasbourg · Piscine du Wacken', value: 'fermée · ouvre à 07:00', color: 'neutral' },
+    { label: 'Piscine du Wacken', value: 'fermée · ouvre 07:00', color: 'neutral' },
   ]);
   const empty = await createWorld();
   t.after(() => empty.app.stop());
   const none = await empty.fake.widgetGet('pools', { language: 'en' });
   assert.match(none.data.content.components[0].text, /Discover tab/);
+});
+
+test('the widget: several pools of one city stay distinct in a narrow column', async (t) => {
+  const world = await createWorld({ config: { cities: ['strasbourg', 'strasbourg_rink'] } });
+  t.after(() => world.app.stop());
+  for (const name of ['Wacken', 'Hautepierre', 'Hardt', 'Ostwald', 'Kibitzenau']) {
+    await create(world, name);
+  }
+  world.clock.time = AFTERNOON + 3600 * 1000;
+  openStrasbourg(world, WACKEN, 179, 'GREEN');
+  await cycle(world, 1);
+  const ack = await world.fake.widgetGet('pools', { language: 'fr' });
+  const content = ack.data.content;
+  assert.deepEqual(validateWidgetContent(content), []);
+  const items = content.components[0].items;
+  // One city, pools only: neither "Strasbourg · " nor "Piscine de".
+  assert.deepEqual(
+    items.map((item) => item.label),
+    ['Wacken', 'Hautepierre', 'Hardt', 'Ostwald', 'Kibitzenau'],
+  );
+  assert.equal(new Set(items.map((item) => item.label)).size, items.length);
+  assert.deepEqual(items[0], {
+    label: 'Wacken',
+    value: '179 · fluide · → 20:00',
+    color: 'success',
+  });
+  for (const item of items) {
+    assert.ok(item.value.length <= 22, item.value);
+  }
+  // The ice rink joins: same city, two kinds, the kind words come back.
+  await create(world, 'Iceberg');
+  const mixed = await world.fake.widgetGet('pools', { language: 'en' });
+  assert.deepEqual(validateWidgetContent(mixed.data.content), []);
+  assert.deepEqual(
+    mixed.data.content.components[0].items.map((item) => item.label),
+    [
+      'Piscine du Wacken',
+      'Piscine de Hautepierre',
+      'Piscine de la Hardt',
+      "Piscine d'Ostwald",
+      'Piscine de la Kibitzenau',
+      "Patinoire l'Iceberg",
+    ],
+  );
+  assert.equal(mixed.data.content.components[0].items[0].value, '179 · quiet · → 20:00');
 });
 
 test('the scene action: a sentence and numbers', async (t) => {
@@ -311,8 +357,8 @@ test('the Iceberg ice rink: its own choice, the same features, triggers and stat
   assert.deepEqual(validateWidgetContent(ack.data.content), []);
   assert.deepEqual(ack.data.content.components[0].items, [
     {
-      label: "Strasbourg · Patinoire l'Iceberg",
-      value: "70 pers. · fluide · jusqu'à 18:30",
+      label: "Patinoire l'Iceberg",
+      value: '70 · fluide · → 18:30',
       color: 'success',
     },
   ]);

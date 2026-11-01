@@ -455,8 +455,8 @@ export class Pools {
   }
 
   /**
-   * "85 pers. · fluide · jusqu'à 20:00", "fermée · ouvre à 14:00"… for a
-   * widget row (40 characters).
+   * "85 · fluide · → 20:00", "fermée · ouvre 14:00"… for a widget row, short
+   * enough for a narrow column.
    */
   shortText(city, reading, language, { hours = true } = {}) {
     if (!reading) {
@@ -476,7 +476,7 @@ export class Pools {
     }
     return [
       reading.people === null
-        ? say(TEXT, language, 'noCount')
+        ? say(TEXT, language, 'noCountShort')
         : say(TEXT, language, 'people', reading),
       reading.level ? say(TEXT, language, `level_${reading.level}`) : null,
       hours && current ? say(TEXT, language, 'until', { time: clock(current.to) }) : null,

@@ -293,6 +293,14 @@ les tests (`openStrasbourg`, `countBordeaux` de `test/helpers/world.js`).
   franchi, à la réouverture le compte repart de 0. `opened`/`closed` : Strasbourg seulement.
   Bordeaux (sans état) : une chute à 0 = fermeture ou remise à zéro nocturne, pas de `crowd_below`.
   Une zone sans comptage rend la piscine inconnue (`people` null), jamais une somme partielle.
-- Widget : une ligne `status` par piscine, ≤ 40 caractères (« 999 pers. · très chargée · jusqu'à
-  20:00 » tient tout juste) ; réglage `show_hours` pour masquer les horaires.
+- Widget : une ligne `status` par piscine ; réglage `show_hours` (« Afficher les horaires ») pour
+  masquer les horaires. Depuis le 01/11/2026 (retour de mutmut, t/11477 : coupé en 3-4 colonnes et
+  sur mobile), valeurs compactes (« 179 · fluide · → 18:30 », « fermée · ouvre 14:00 », « 380/400 »)
+  et libellés raccourcis par `rowLabels` (`src/widgets.js`) : préfixe « Ville · » retiré si toutes
+  les lignes sont de la même ville, mot « Piscine de » / « Patinoire l' » retiré si plusieurs lignes
+  du même genre ; jamais deux libellés identiques (retour au nom plus long), et seulement sur le nom
+  par défaut (un nom changé dans Gladys reste tel quel).
+- L'action « État » compte les appareils de `gladys.devices`, la même liste que le widget, chargée
+  par le SDK avant `connected` : un « 0 équipement » avec un widget rempli vient d'un ordre
+  d'actions (état lu avant l'ajout), pas d'un écart de code.
 - `gladys_version >=5.3.0` à cause de `countries` et `keywords`.

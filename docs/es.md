@@ -89,9 +89,18 @@ Pasados **45 minutos** sin actualización de la ciudad, el dato se considera **c
 ## Widget del panel
 
 Añada el widget **Piscinas** a un panel. Muestra una línea por piscina vigilada (diez como
-máximo), con el nombre que le dio en Gladys, por ejemplo «85 pers. · tranquila · hasta 20:00», o
-«cerrada · abre a las 07:00». En sus ajustes: las piscinas mostradas (vacío: todas) y si se
-muestra el horario.
+máximo), con el nombre que le dio en Gladys. Cada línea se lee así: personas presentes, nivel de
+afluencia, hora de cierre tras la flecha, por ejemplo «85 · tranquila · → 20:00», o «cerrada · abre
+07:00»; en Burdeos, personas presentes sobre la capacidad («380/400»). En sus ajustes: las piscinas
+mostradas (vacío: todas) y **Mostrar el horario**.
+
+Las líneas son cortas para un widget estrecho (tres o cuatro columnas, o un teléfono). Cuando todas
+las líneas son de la misma ciudad, la ciudad no se repite: «Piscine du Wacken» en lugar de
+«Strasbourg · Piscine du Wacken». Cuando hay varias líneas, todas piscinas (o todas pistas de
+hielo), la palabra «Piscine» también desaparece: «Wacken», «Hautepierre». Dos líneas nunca se leen
+igual: la que lo haría conserva su nombre más largo. Un nombre que usted cambió en Gladys se muestra
+tal como lo escribió. ¿Sigue siendo demasiado largo? Desmarque **Mostrar el horario**, o dé a la
+piscina un nombre corto en Gladys.
 
 Colores: el nivel del operador en Estrasburgo (**verde** tranquila, **naranja** concurrida,
 **rojo** muy concurrida o completa); la ocupación en Burdeos (**naranja** desde el 70 %, **rojo**

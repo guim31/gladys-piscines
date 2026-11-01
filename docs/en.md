@@ -85,8 +85,17 @@ After **45 minutes** without an update from the city, the data is **out of date*
 ## Dashboard widget
 
 Add the **Swimming pools** widget to a dashboard. It shows one row per watched pool (ten at most),
-under the name you gave it in Gladys, for instance "85 people · quiet · until 20:00", or "closed ·
-opens at 07:00". In its settings: the pools shown (empty: all) and whether to show the hours.
+under the name you gave it in Gladys. Each row reads: people inside, crowd level, closing time
+after the arrow, for instance "85 · quiet · → 20:00", or "closed · opens 07:00"; in Bordeaux,
+people inside out of the capacity ("380/400"). In its settings: the pools shown (empty: all) and
+**Show the opening hours**.
+
+The rows stay short for a narrow widget (three or four columns, or a phone). When every row is of
+the same city, the city is not repeated: "Piscine du Wacken" rather than "Strasbourg · Piscine du
+Wacken". When there are several rows, all pools (or all ice rinks), the kind word goes too:
+"Wacken", "Hautepierre". Two rows never read the same: one that would keeps its longer name. A name
+you changed in Gladys is shown as you wrote it. Still too long? Untick **Show the opening hours**,
+or give the pool a short name in Gladys.
 
 Colors: the operator's level in Strasbourg (**green** quiet, **orange** moderate, **red** busy or
 full); the occupancy in Bordeaux (**orange** from 70 %, **red** from 90 %); **grey** when the pool

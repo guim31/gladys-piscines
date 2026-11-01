@@ -91,7 +91,7 @@ Pasados **45 minutos** sin actualización de la ciudad, el dato se considera **c
 Añada el widget **Piscinas** a un panel. Muestra una línea por piscina vigilada (diez como
 máximo), con el nombre que le dio en Gladys. Cada línea se lee así: personas presentes, nivel de
 afluencia, hora de cierre tras la flecha, por ejemplo «85 · tranquila · → 20:00», o «cerrada · abre
-07:00»; en Burdeos, personas presentes sobre la capacidad («380/400»). En sus ajustes: las piscinas
+07:00»; en Burdeos, personas presentes sobre la capacidad («380 / 400 pers.»). En sus ajustes: las piscinas
 mostradas (vacío: todas) y **Mostrar el horario**.
 
 Las líneas son cortas para un widget estrecho (tres o cuatro columnas, o un teléfono). Cuando todas

@@ -160,7 +160,7 @@ test('the widget: name given in Gladys, crowd, hours, colors; hours can be hidde
   // Gladys lists the device updated last.
   assert.deepEqual(content.components[0].items, [
     // Two cities: the prefix stays; a name changed in Gladys is never shortened.
-    { label: 'Bordeaux · Piscine Galin', value: '380/400', color: 'danger' },
+    { label: 'Bordeaux · Piscine Galin', value: '380 / 400 pers.', color: 'danger' },
     { label: 'Ma piscine', value: '85 · chargée · → 20:00', color: 'warning' },
   ]);
   const hidden = await world.fake.widgetGet('pools', {

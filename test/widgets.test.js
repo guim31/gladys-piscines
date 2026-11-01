@@ -25,6 +25,7 @@ test('the kind word and its article go, the place stays readable', () => {
   assert.equal(withoutKind("Patinoire l'Iceberg", 'rink'), 'Iceberg');
   assert.equal(withoutKind("Patinoire l'Iceberg", 'pool'), null);
   assert.equal(withoutKind('Aquapolis', 'pool'), null);
+  assert.equal(withoutKind('Piscine de', 'pool'), null);
 });
 
 test('one city: the prefix goes; one facility keeps its kind word', () => {

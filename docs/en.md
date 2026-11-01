@@ -87,7 +87,7 @@ After **45 minutes** without an update from the city, the data is **out of date*
 Add the **Swimming pools** widget to a dashboard. It shows one row per watched pool (ten at most),
 under the name you gave it in Gladys. Each row reads: people inside, crowd level, closing time
 after the arrow, for instance "85 · quiet · → 20:00", or "closed · opens 07:00"; in Bordeaux,
-people inside out of the capacity ("380/400"). In its settings: the pools shown (empty: all) and
+people inside out of the capacity ("380 / 400 people"). In its settings: the pools shown (empty: all) and
 **Show the opening hours**.
 
 The rows stay short for a narrow widget (three or four columns, or a phone). When every row is of

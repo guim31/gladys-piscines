@@ -43,7 +43,11 @@ export function withoutKind(name, kind) {
     return null;
   }
   const rest = name.replace(pattern, '').replace(ARTICLE, '').trim();
-  return rest.length >= 2 ? rest.charAt(0).toUpperCase() + rest.slice(1) : null;
+  // "Piscine de" alone leaves an article, not a place.
+  if (rest.length < 2 || /^(?:de|du|des|la|le|les)$/i.test(rest)) {
+    return null;
+  }
+  return rest.charAt(0).toUpperCase() + rest.slice(1);
 }
 
 /**

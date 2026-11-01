@@ -89,7 +89,7 @@ Nach **45 Minuten** ohne Aktualisierung durch die Stadt gelten die Daten als **v
 Füge das Widget **Schwimmbäder** zu einem Dashboard hinzu. Es zeigt eine Zeile pro überwachtem Bad
 (höchstens zehn), unter dem Namen, den du ihm in Gladys gegeben hast. Jede Zeile liest sich so:
 anwesende Personen, Andrang, Schließzeit nach dem Pfeil, zum Beispiel „85 · ruhig · → 20:00“ oder
-„geschlossen · öffnet 07:00“; in Bordeaux anwesende Personen von der Kapazität („380/400“). In den
+„geschlossen · öffnet 07:00“; in Bordeaux anwesende Personen von der Kapazität („380 / 400 Pers.“). In den
 Einstellungen: die angezeigten Bäder (leer: alle) und **Öffnungszeiten anzeigen**.
 
 Die Zeilen bleiben kurz für ein schmales Widget (drei oder vier Spalten oder ein Handy). Sind alle

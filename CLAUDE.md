@@ -295,7 +295,7 @@ les tests (`openStrasbourg`, `countBordeaux` de `test/helpers/world.js`).
   Une zone sans comptage rend la piscine inconnue (`people` null), jamais une somme partielle.
 - Widget : une ligne `status` par piscine ; réglage `show_hours` (« Afficher les horaires ») pour
   masquer les horaires. Depuis le 01/11/2026 (retour de mutmut, t/11477 : coupé en 3-4 colonnes et
-  sur mobile), valeurs compactes (« 179 · fluide · → 18:30 », « fermée · ouvre 14:00 », « 380/400 »)
+  sur mobile), valeurs compactes (« 179 · fluide · → 18:30 », « fermée · ouvre 14:00 », unité gardée si le compte est seul : « 380 / 400 pers. »)
   et libellés raccourcis par `rowLabels` (`src/widgets.js`) : préfixe « Ville · » retiré si toutes
   les lignes sont de la même ville, mot « Piscine de » / « Patinoire l' » retiré si plusieurs lignes
   du même genre ; jamais deux libellés identiques (retour au nom plus long), et seulement sur le nom

@@ -91,7 +91,7 @@ Ajoutez le widget **Piscines** à un tableau de bord. Il affiche une ligne par p
 au plus), sous le nom que vous lui avez donné dans Gladys. Chaque ligne se lit : personnes
 présentes, niveau d'affluence, heure de fermeture après la flèche, par exemple « 85 · fluide ·
 → 20:00 », ou « fermée · ouvre 07:00 » ; à Bordeaux, les personnes présentes sur la capacité
-(« 380/400 »). Dans ses réglages : les piscines affichées (vide : toutes) et **Afficher les
+(« 380 / 400 pers. »). Dans ses réglages : les piscines affichées (vide : toutes) et **Afficher les
 horaires**.
 
 Les lignes restent courtes pour un widget étroit (trois ou quatre colonnes, ou un téléphone). Quand
